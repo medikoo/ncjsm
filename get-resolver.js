@@ -5,18 +5,19 @@
 var dirname = function (path) { return path.slice(0, path.lastIndexOf('/')) || '/'; };
 var join = function (a, b) { return (a === '/') ? a + b : a + '/' + b; };
 
-module.exports = function (extensions, confirmFile, resolvePackageMain, passThru) {
+module.exports = function (extensions, confirmFile, resolvePackageMain) {
 	var resolveFile = function (path, extIndex) {
-		return confirmFile(path + ((extIndex != null) ? extensions[extIndex] : ''))(function (result) {
-			if (result) return passThru(result);
+		var targetPath = path + ((extIndex != null) ? extensions[extIndex] : '');
+		return confirmFile(targetPath).then(function (result) {
+			if (result) return result;
 			if (extIndex == null) extIndex = 0;
 			else ++extIndex;
-			if (!extensions[extIndex]) return passThru(null);
+			if (!extensions[extIndex]) return null;
 			return resolveFile(path, extIndex);
 		});
 	};
 	var resolveDirectory = function (path) {
-		return resolvePackageMain(path)(function (result) {
+		return resolvePackageMain(path).then(function (result) {
 			if (result) return resolveFile(join(path, result));
 			return resolveFile(join(path, 'index'), 0);
 		});
@@ -31,14 +32,12 @@ module.exports = function (extensions, confirmFile, resolvePackageMain, passThru
 				if (path.charAt(path.length - 3) === '/') return resolveDirectory(path);
 			}
 		}
-		return resolveFile(path)(function (result) {
-			return result ? passThru(result) : resolveDirectory(path);
-		});
+		return resolveFile(path).then(function (result) { return result || resolveDirectory(path); });
 	};
 	var resolveExternal = function (cwd, path) {
-		return resolveLocal(join(cwd, 'node_modules') + '/' + path)(function (result) {
-			if (result) return passThru(result);
-			if (cwd === '/') return passThru(null);
+		return resolveLocal(join(cwd, 'node_modules') + '/' + path).then(function (result) {
+			if (result) return result;
+			if (cwd === '/') return null;
 			return resolveExternal(dirname(cwd), path);
 		});
 	};
