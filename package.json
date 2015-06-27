@@ -14,8 +14,12 @@
     "type": "git",
     "url": "git://github.com/medikoo/cjs-module.git"
   },
-  "devDependencies": {
+  "dependencies": {
     "es5-ext": "^0.10.7",
+    "fs2": "0.2"
+  },
+  "devDependencies": {
+    "deferred": "^0.7.2",
     "tad": "^0.2.2",
     "xlint": "^0.2.1",
     "xlint-jslint-medikoo": "^0.1.3"
