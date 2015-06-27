@@ -16,4 +16,4 @@ stupid
 vars
 
 ./test
-predef+ document, setTimeout
+predef+ __dirname
