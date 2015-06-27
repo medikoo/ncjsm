@@ -31,7 +31,7 @@ var isFile = function (path) {
 };
 
 var resolvePackageMain = function (path) {
-	return new PassThru(existingMains[resolve(path)]);
+	return new PassThru(existingMains[resolve(path)] || null);
 };
 
 module.exports = function (t, a) {
