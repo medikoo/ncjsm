@@ -1,6 +1,7 @@
 'use strict';
 
-var resolve  = require('path').resolve;
+var resolve  = require('path').resolve
+  , PassThru = require('../utils/pass-thru');
 
 var existingFiles = [
 	'/project/foo.js',
@@ -22,13 +23,6 @@ existingFiles.includes = require('es5-ext/array/#/contains');
 var existingMains = {
 	'/project/dir': 'lorem',
 	'/project/node_modules/outer': 'raz'
-};
-
-var PassThru = function (value) { this.value = value; };
-PassThru.prototype.then = function (fn) {
-	var result = fn(this.value);
-	if (result instanceof PassThru) return result;
-	return new PassThru(result);
 };
 
 var isFile = function (path) {
