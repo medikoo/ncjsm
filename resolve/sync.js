@@ -1,3 +1,5 @@
+// Sync module resolver
+
 'use strict';
 
 var resolve     = require('path').resolve

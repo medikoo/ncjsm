@@ -1,3 +1,5 @@
+// Async module resolver
+
 'use strict';
 
 var getResolver = require('../lib/get-node-resolver')
