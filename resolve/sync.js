@@ -37,4 +37,4 @@ var resolver = getResolver(function (path) {
 	return new PassThru(result);
 });
 
-module.exports = function (cwd, path) { return resolver(cwd, path).value; };
+module.exports = function (dir, path) { return resolver(dir, path).value; };
