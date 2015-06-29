@@ -11,7 +11,7 @@ var resolve     = require('path').resolve
 
   , parse = JSON.parse;
 
-module.exports = getResolver(function (path) {
+var resolver = getResolver(function (path) {
 	var stats;
 	path = resolve(path);
 	try {
@@ -36,3 +36,5 @@ module.exports = getResolver(function (path) {
 	}
 	return new PassThru(result);
 });
+
+module.exports = function (cwd, path) { return resolver(cwd, path).value; };
