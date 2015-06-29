@@ -34,24 +34,24 @@ module.exports = function (extensions, confirmFile, resolvePackageMain) {
 		}
 		return resolveFile(path).then(function (result) { return result || resolveDirectory(path); });
 	};
-	var resolveExternal = function (cwd, path) {
-		return resolveLocal(join(cwd, 'node_modules') + '/' + path).then(function (result) {
+	var resolveExternal = function (dir, path) {
+		return resolveLocal(join(dir, 'node_modules') + '/' + path).then(function (result) {
 			if (result) return result;
-			if (cwd === '/') return null;
-			return resolveExternal(dirname(cwd), path);
+			if (dir === '/') return null;
+			return resolveExternal(dirname(dir), path);
 		});
 	};
-	return function (cwd, path) {
+	return function (dir, path) {
 		var pathChar;
 		if (path.charAt(0) === '/') return resolveLocal(path);
 		if (path.charAt(0) === '.') {
 			pathChar = path.charAt(1);
-			if (!pathChar || (pathChar === '/')) return resolveLocal(join(cwd, path));
+			if (!pathChar || (pathChar === '/')) return resolveLocal(join(dir, path));
 			if (pathChar === '.') {
 				pathChar = path.charAt(2);
-				if (!pathChar || (pathChar === '/')) return resolveLocal(join(cwd, path));
+				if (!pathChar || (pathChar === '/')) return resolveLocal(join(dir, path));
 			}
 		}
-		return resolveExternal(cwd, path);
+		return resolveExternal(dir, path);
 	};
 };
