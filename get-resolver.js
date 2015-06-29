@@ -1,4 +1,4 @@
-// Returns CJS module (sync or async) resolver
+// Returns CJS module (sync or async) path resolver
 
 'use strict';
 
