@@ -19,7 +19,7 @@
     "fs2": "0.2"
   },
   "devDependencies": {
-    "deferred": "git://github.com/medikoo/cjs-module.git#d95308484b5db2e5c61defe842e84f4ef425f0c2",
+    "deferred": "git://github.com/medikoo/deferred.git#d95308484b5db2e5c61defe842e84f4ef425f0c2",
     "tad": "^0.2.2",
     "xlint": "^0.2.1",
     "xlint-jslint-medikoo": "^0.1.3"
