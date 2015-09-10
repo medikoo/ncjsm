@@ -63,6 +63,48 @@ if (!fooModulePath) {
 }
 ```
 
+#### isPackageRoot(dirPath)
+
+Whether provided path is a root of a package
+
+```javascript
+var isPackageRoot = require('cjs-module/is-package-root');
+
+isPackageRoot(dirPath).done(function (isRoot) {
+  if (isRoot) {
+    // Provided path is package root
+  }
+})
+```
+
+#### resolvePackageRoot(dirPath)
+
+Resolve package root path for provided path. It is about resolution of first upper package root
+
+```javascript
+var resolvePackageRoot = require('cjs-module/resolve-package-root');
+
+resolvePackageRoot(dirPath).done(function (root) {
+  if (!root) {
+    // Provided path is not located in any package
+  }
+});
+```
+
+#### resolveProjectRoot(dirPath)
+
+Resolve project root path for provided path. It is about resolution of topmost package root for given path
+
+```javascript
+var resolveProjectRoot = require('cjs-module/resolve-project-root');
+
+resolveProjectRoot(dirPath).done(function (root) {
+  if (!root) {
+    // Provided path is not located in any project
+  }
+});
+```
+
 ## Tests [![Build Status](https://travis-ci.org/medikoo/cjs-module.svg)](https://travis-ci.org/medikoo/cjs-module)
 
 	$ npm test
