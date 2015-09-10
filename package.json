@@ -1,6 +1,6 @@
 {
   "name": "cjs-module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CJS (Node.js) style modules resolver",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
@@ -19,10 +19,10 @@
     "fs2": "0.2"
   },
   "devDependencies": {
-    "deferred": "git://github.com/medikoo/deferred.git#d95308484b5db2e5c61defe842e84f4ef425f0c2",
+    "deferred": "^0.7.3",
     "tad": "^0.2.2",
     "xlint": "^0.2.1",
-    "xlint-jslint-medikoo": "^0.1.3"
+    "xlint-jslint-medikoo": "^0.1.4"
   },
   "scripts": {
     "lint": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
