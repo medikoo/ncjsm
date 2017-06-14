@@ -21,12 +21,18 @@
   "devDependencies": {
     "deferred": "^0.7.3",
     "tad": "^0.2.2",
-    "xlint": "^0.2.1",
-    "xlint-jslint-medikoo": "^0.1.4"
+    "eslint": "4",
+    "eslint-config-medikoo": "^1.18"
+  },
+  "eslintConfig": {
+    "extends": "medikoo",
+    "root": true,
+    "env": {
+      "node": true
+    }
   },
   "scripts": {
-    "lint": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
-    "lint-console": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --watch",
+    "lint": "eslint --ignore-path=.gitignore .",
     "test": "node node_modules/tad/bin/tad"
   },
   "license": "MIT"
