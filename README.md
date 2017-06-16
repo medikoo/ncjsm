@@ -105,6 +105,18 @@ resolveProjectRoot(dirPath).done(function (root) {
 });
 ```
 
+#### getDependecies(modulePath)
+
+Resolve all module dependencies. Returns promise that resolves with an array of paths, that includes path to input module and paths to all its dependencies (it includes deep dependencies, so also dependencies of the dependencies)
+
+```javascript
+var getDependencies = require('cjs-module/get-dependencies');
+
+getDependencies(modulePath).done(function (deps) {
+  console.log(deps); // e.g. [pathToModulePath, pathToDep1, pathToDep2, ...pathToDepn]
+});
+```
+
 ## Tests [![Build Status](https://travis-ci.org/medikoo/cjs-module.svg)](https://travis-ci.org/medikoo/cjs-module)
 
 	$ npm test
