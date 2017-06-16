@@ -1,9 +1,7 @@
 "use strict";
 
-var path = require("path")
-
-  , resolve = path.resolve
-
+var path          = require("path")
+  , resolve       = path.resolve
   , playgroundDir = resolve(__dirname, "../__playground");
 
 module.exports = function (t, a) {
@@ -32,16 +30,26 @@ module.exports = function (t, a) {
 	a(t(playgroundDir, "outer/boo.json"), null);
 	a(t(playgroundDir, "outer3"), playgroundDir + "/node_modules/outer3/index.js");
 	a(t(playgroundDir, "nested/elo"), null);
-	a(t(playgroundDir + "/node_modules/outer", "outer3"),
-		playgroundDir + "/node_modules/outer3/index.js");
+	a(
+		t(playgroundDir + "/node_modules/outer", "outer3"),
+		playgroundDir + "/node_modules/outer3/index.js"
+	);
 	a(t(playgroundDir + "/node_modules/outer", "project/foo"), null);
-	a(t(playgroundDir + "/node_modules/outer", "nested/elo"),
-		playgroundDir + "/node_modules/outer/node_modules/nested/elo.js");
+	a(
+		t(playgroundDir + "/node_modules/outer", "nested/elo"),
+		playgroundDir + "/node_modules/outer/node_modules/nested/elo.js"
+	);
 	a(t(playgroundDir + "/node_modules/outer/node_modules/nested", "project/foo"), null);
-	a(t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer"),
-		playgroundDir + "/node_modules/outer/raz.js");
-	a(t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer/boo"),
-		playgroundDir + "/node_modules/outer/boo.js");
-	a(t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer3"),
-		playgroundDir + "/node_modules/outer3/index.js");
+	a(
+		t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer"),
+		playgroundDir + "/node_modules/outer/raz.js"
+	);
+	a(
+		t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer/boo"),
+		playgroundDir + "/node_modules/outer/boo.js"
+	);
+	a(
+		t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer3"),
+		playgroundDir + "/node_modules/outer3/index.js"
+	);
 };

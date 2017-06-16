@@ -2,134 +2,105 @@
 
 var deferred = require("deferred")
   , path     = require("path")
-
-  , resolve = path.resolve
-
-  , playgroundDir = resolve(__dirname, "../__playground");
+  , resolve  = path.resolve
+  , pgDir    = resolve(__dirname, "../__playground");
 
 module.exports = function (t, a, d) {
 	deferred(
-		t(playgroundDir, "./foo").then(function (value) {
- a(value, playgroundDir + "/foo.js");
-}),
-		t(playgroundDir, "./foo.js").then(function (value) {
- a(value, playgroundDir + "/foo.js");
-}),
-		t(playgroundDir, "./foo.json").then(function (value) {
- a(value, null);
-}),
-		t(playgroundDir, "./other").then(function (value) {
- a(value, playgroundDir + "/other.js");
-}),
-		t(playgroundDir, "./other/")
-			.then(function (value) {
- a(value, playgroundDir + "/other/index.js");
-}),
-		t(playgroundDir, "./samename")
-			.then(function (value) {
- a(value, playgroundDir + "/samename");
-}),
-		t(playgroundDir, "./samename.js")
-			.then(function (value) {
- a(value, playgroundDir + "/samename.js");
-}),
-		t(playgroundDir, "./samename.json")
-			.then(function (value) {
- a(value, playgroundDir + "/samename.json");
-}),
-		t(playgroundDir, "./samename")
-			.then(function (value) {
- a(value, playgroundDir + "/samename");
-}),
-		t(playgroundDir, "./dir")
-			.then(function (value) {
- a(value, playgroundDir + "/dir/lorem.js");
-}),
-		t(playgroundDir, "./dir/lorem")
-			.then(function (value) {
- a(value, playgroundDir + "/dir/lorem.js");
-}),
-		t(playgroundDir, "./dir/subdir/bar")
-			.then(function (value) {
- a(value, playgroundDir + "/dir/subdir/bar.js");
-}),
-		t(playgroundDir + "/dir", ".")
-			.then(function (value) {
- a(value, playgroundDir + "/dir/lorem.js");
-}),
-		t(playgroundDir + "/dir", "./")
-			.then(function (value) {
- a(value, playgroundDir + "/dir/lorem.js");
-}),
-		t(playgroundDir + "/dir", "./lorem")
-			.then(function (value) {
- a(value, playgroundDir + "/dir/lorem.js");
-}),
-		t(playgroundDir + "/dir", "../other")
-			.then(function (value) {
- a(value, playgroundDir + "/other.js");
-}),
-		t(playgroundDir + "/dir", "../other/")
-			.then(function (value) {
- a(value, playgroundDir + "/other/index.js");
-}),
-		t(playgroundDir + "/dir/subdir", "../")
-			.then(function (value) {
- a(value, playgroundDir + "/dir/lorem.js");
-}),
-		t(playgroundDir + "/dir/subdir", "../../foo")
-			.then(function (value) {
- a(value, playgroundDir + "/foo.js");
-}),
-
-		t(playgroundDir, "outer")
-			.then(function (value) {
- a(value, playgroundDir + "/node_modules/outer/raz.js");
-}),
-		t(playgroundDir, "outer/boo")
-			.then(function (value) {
- a(value, playgroundDir + "/node_modules/outer/boo.js");
-}),
-		t(playgroundDir, "outer/boo.json").then(function (value) {
- a(value, null);
-}),
-		t(playgroundDir, "outer3")
-			.then(function (value) {
- a(value, playgroundDir + "/node_modules/outer3/index.js");
-}),
-		t(playgroundDir, "nested/elo").then(function (value) {
- a(value, null);
-}),
-		t(playgroundDir + "/node_modules/outer", "outer3")
-			.then(function (value) {
- a(value, playgroundDir + "/node_modules/outer3/index.js");
-}),
-		t(playgroundDir + "/node_modules/outer", "project/foo")
-			.then(function (value) {
- a(value, null);
-}),
-		t(playgroundDir + "/node_modules/outer", "nested/elo")
-			.then(function (value) {
- a(value,
-				playgroundDir + "/node_modules/outer/node_modules/nested/elo.js");
-}),
-		t(playgroundDir + "/node_modules/outer/node_modules/nested", "project/foo")
-			.then(function (value) {
- a(value, null);
-}),
-		t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer")
-			.then(function (value) {
- a(value, playgroundDir + "/node_modules/outer/raz.js");
-}),
-		t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer/boo")
-			.then(function (value) {
- a(value, playgroundDir + "/node_modules/outer/boo.js");
-}),
-		t(playgroundDir + "/node_modules/outer/node_modules/nested", "outer3")
-			.then(function (value) {
- a(value, playgroundDir + "/node_modules/outer3/index.js");
-})
+		t(pgDir, "./foo").then(function (value) {
+			a(value, pgDir + "/foo.js");
+		}),
+		t(pgDir, "./foo.js").then(function (value) {
+			a(value, pgDir + "/foo.js");
+		}),
+		t(pgDir, "./foo.json").then(function (value) {
+			a(value, null);
+		}),
+		t(pgDir, "./other").then(function (value) {
+			a(value, pgDir + "/other.js");
+		}),
+		t(pgDir, "./other/").then(function (value) {
+			a(value, pgDir + "/other/index.js");
+		}),
+		t(pgDir, "./samename").then(function (value) {
+			a(value, pgDir + "/samename");
+		}),
+		t(pgDir, "./samename.js").then(function (value) {
+			a(value, pgDir + "/samename.js");
+		}),
+		t(pgDir, "./samename.json").then(function (value) {
+			a(value, pgDir + "/samename.json");
+		}),
+		t(pgDir, "./samename").then(function (value) {
+			a(value, pgDir + "/samename");
+		}),
+		t(pgDir, "./dir").then(function (value) {
+			a(value, pgDir + "/dir/lorem.js");
+		}),
+		t(pgDir, "./dir/lorem").then(function (value) {
+			a(value, pgDir + "/dir/lorem.js");
+		}),
+		t(pgDir, "./dir/subdir/bar").then(function (value) {
+			a(value, pgDir + "/dir/subdir/bar.js");
+		}),
+		t(pgDir + "/dir", ".").then(function (value) {
+			a(value, pgDir + "/dir/lorem.js");
+		}),
+		t(pgDir + "/dir", "./").then(function (value) {
+			a(value, pgDir + "/dir/lorem.js");
+		}),
+		t(pgDir + "/dir", "./lorem").then(function (value) {
+			a(value, pgDir + "/dir/lorem.js");
+		}),
+		t(pgDir + "/dir", "../other").then(function (value) {
+			a(value, pgDir + "/other.js");
+		}),
+		t(pgDir + "/dir", "../other/").then(function (value) {
+			a(value, pgDir + "/other/index.js");
+		}),
+		t(pgDir + "/dir/subdir", "../").then(function (value) {
+			a(value, pgDir + "/dir/lorem.js");
+		}),
+		t(pgDir + "/dir/subdir", "../../foo").then(function (value) {
+			a(value, pgDir + "/foo.js");
+		}),
+		t(pgDir, "outer").then(function (value) {
+			a(value, pgDir + "/node_modules/outer/raz.js");
+		}),
+		t(pgDir, "outer/boo").then(function (value) {
+			a(value, pgDir + "/node_modules/outer/boo.js");
+		}),
+		t(pgDir, "outer/boo.json").then(function (value) {
+			a(value, null);
+		}),
+		t(pgDir, "outer3").then(function (value) {
+			a(value, pgDir + "/node_modules/outer3/index.js");
+		}),
+		t(pgDir, "nested/elo").then(function (value) {
+			a(value, null);
+		}),
+		t(pgDir + "/node_modules/outer", "outer3").then(function (value) {
+			a(value, pgDir + "/node_modules/outer3/index.js");
+		}),
+		t(pgDir + "/node_modules/outer", "project/foo").then(function (value) {
+			a(value, null);
+		}),
+		t(pgDir + "/node_modules/outer", "nested/elo").then(function (value) {
+			a(value, pgDir + "/node_modules/outer/node_modules/nested/elo.js");
+		}),
+		t(pgDir + "/node_modules/outer/node_modules/nested", "project/foo").then(function (value) {
+			a(value, null);
+		}),
+		t(pgDir + "/node_modules/outer/node_modules/nested", "outer").then(function (value) {
+			a(value, pgDir + "/node_modules/outer/raz.js");
+		}),
+		t(pgDir + "/node_modules/outer/node_modules/nested", "outer/boo").then(function (value) {
+			a(value, pgDir + "/node_modules/outer/boo.js");
+		}),
+		t(pgDir + "/node_modules/outer/node_modules/nested", "outer3").then(function (value) {
+			a(value, pgDir + "/node_modules/outer3/index.js");
+		})
 	).done(function () {
- d();
-}, d);
+		d();
+	}, d);
 };
