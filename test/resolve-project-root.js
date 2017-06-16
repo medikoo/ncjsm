@@ -1,21 +1,30 @@
-'use strict';
+"use strict";
 
-var deferred = require('deferred')
-  , path     = require('path')
+var deferred = require("deferred")
+  , path     = require("path");
 
-  , resolve = path.resolve
-
-  , root = resolve(__dirname, '..')
-  , playgroundDir = resolve(__dirname, '__playground');
+var resolve = path.resolve
+  , rootDir = resolve(__dirname, "..")
+  , playgroundDir = resolve(__dirname, "__playground");
 
 module.exports = function (t, a, d) {
 	deferred(
-		t(playgroundDir)(function (value) { a(value, root, "node_modules"); }),
-		t(resolve(playgroundDir, 'otherdir'))(function (value) { a(value, root, "Empty"); }),
-		t(resolve(playgroundDir, 'dir'))(function (value) { a(value, root, "package.json"); }),
-		t(resolve(playgroundDir, 'node_modules/outer'))(function (value) { a(value, root,
-			"package.json and node_modules"); }),
-		t(resolve(playgroundDir, 'node_modules/outer3'))(function (value) { a(value, root,
-			"In node_modules"); })
-	).done(function () { d(); }, d);
+		t(playgroundDir)(function (value) {
+			a(value, rootDir, "node_modules");
+		}),
+		t(resolve(playgroundDir, "otherdir"))(function (value) {
+			a(value, rootDir, "Empty");
+		}),
+		t(resolve(playgroundDir, "dir"))(function (value) {
+			a(value, rootDir, "package.json");
+		}),
+		t(resolve(playgroundDir, "node_modules/outer"))(function (value) {
+			a(value, rootDir, "package.json and node_modules");
+		}),
+		t(resolve(playgroundDir, "node_modules/outer3"))(function (value) {
+			a(value, rootDir, "In node_modules");
+		})
+	).done(function () {
+		d();
+	}, d);
 };

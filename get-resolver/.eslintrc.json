@@ -1,4 +1,14 @@
 {
   "extends": "medikoo-es3",
-  "root": true
+  "root": true,
+  "rules": {
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
+    "no-eq-null": "off"
+  }
 }

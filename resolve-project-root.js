@@ -1,7 +1,9 @@
 // Find top most package root
 
-'use strict';
+"use strict";
 
-var resolveRoot = require('./lib/resolve-root');
+var resolveRoot = require("./lib/resolve-root");
 
-module.exports = function (path) { return resolveRoot(path, true); };
+module.exports = function (path) {
+ return resolveRoot(path, true);
+};
