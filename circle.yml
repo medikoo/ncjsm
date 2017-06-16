@@ -7,6 +7,5 @@ test:
     - npm test
     - nvm use 6; npm test
     - npm run lint
-    - npm run check-coverage
     - nvm use 4; npm test
     - nvm use 0.12; npm test
