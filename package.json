@@ -22,7 +22,8 @@
     "deferred": "^0.7.3",
     "tad": "^0.2.2",
     "eslint": "4",
-    "eslint-config-medikoo": "^1.18"
+    "eslint-config-medikoo": "^1.18",
+    "eslint-config-medikoo-es3": "1"
   },
   "eslintConfig": {
     "extends": "medikoo",

@@ -1,0 +1,4 @@
+{
+  "extends": "medikoo-es3",
+  "root": true
+}
