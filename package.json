@@ -15,12 +15,12 @@
     "url": "git://github.com/medikoo/cjs-module.git"
   },
   "dependencies": {
-    "es5-ext": "^0.10.7",
-    "fs2": "0.2"
+    "es5-ext": "^0.10.23",
+    "fs2": "^0.2.4"
   },
   "devDependencies": {
-    "deferred": "^0.7.3",
-    "tad": "^0.2.2",
+    "deferred": "^0.7.8",
+    "tad": "^0.2.7",
     "eslint": "4",
     "eslint-config-medikoo-es3": "1",
     "eslint-config-medikoo-es5": "^1.4"
