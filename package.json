@@ -22,11 +22,11 @@
     "deferred": "^0.7.3",
     "tad": "^0.2.2",
     "eslint": "4",
-    "eslint-config-medikoo": "^1.18",
-    "eslint-config-medikoo-es3": "1"
+    "eslint-config-medikoo-es3": "1",
+    "eslint-config-medikoo-es5": "^1.4"
   },
   "eslintConfig": {
-    "extends": "medikoo",
+    "extends": "medikoo-es5",
     "root": true,
     "env": {
       "node": true
