@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "es5-ext": "^0.10.23",
+    "find-requires": "^0.2.3",
     "fs2": "^0.2.4"
   },
   "devDependencies": {
