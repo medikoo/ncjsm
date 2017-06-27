@@ -5,7 +5,7 @@ Environment agnostic CJS (Node.js) modules resolver.
 It implements a _strict_ version of Node.js modules resolution logic, differences are as follows:
 
 - [Loading from global folders](https://nodejs.org/api/all.html#all_loading_from_the_global_folders) is not supported
-- Only Unix path separators (`/`) are supported in require's _path_ arguments
+- Only Unix path separators (`/`) are supported in require's _path_ arguments (_Background: even though Node.js internally seems to follow Windows path separator in Windows environment, it won't work in *nix environments, and even in Window env it's [not reliable](https://github.com/nodejs/node/issues/6049) so by all means should be avoided_)
 - There's no awareness of node.js [core modules](https://nodejs.org/api/all.html#all_core_modules)
   e.g. `resolve(dir, 'fs')` will naturally result with _null_
 
