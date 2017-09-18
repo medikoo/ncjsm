@@ -22,7 +22,13 @@ module.exports = function (extensions, confirmFile, resolvePackageMain) {
 	};
 	var resolveDirectory = function (path) {
 		return resolvePackageMain(path).then(function (result) {
-			if (result) return resolveFile(join(path, result));
+			if (result) {
+				var mainPath = join(path, result);
+				return resolveFile(mainPath).then(function (mainResult) {
+					if (mainResult) return mainResult;
+					return resolveFile(join(mainPath, "index"), 0);
+				});
+			}
 			return resolveFile(join(path, "index"), 0);
 		});
 	};

@@ -76,6 +76,9 @@ module.exports = function (t, a, d) {
 		t(pgDir, "outer3").then(function (value) {
 			a(value, resolve(pgDir + "/node_modules/outer3/index.js"));
 		}),
+		t(pgDir, "pkg-main-dir").then(function (value) {
+			a(value, resolve(pgDir + "/node_modules/pkg-main-dir/lib/index.js"));
+		}),
 		t(pgDir, "nested/elo").then(function (value) {
 			a(value, null);
 		}),
