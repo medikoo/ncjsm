@@ -35,7 +35,7 @@ var getDirectDependencies = function (modulePath) {
 module.exports = function (programPath) {
 	programPath = resolve(ensureString(programPath));
 	var paths = Object.create(null);
-	return (function self (modulePath) {
+	return (function self(modulePath) {
 		if (paths[modulePath]) return null;
 		return paths[modulePath] = getDirectDependencies(modulePath).map(self);
 	}(programPath))(function () {
