@@ -3,17 +3,8 @@
   "version": "1.2.2",
   "description": "CJS (Node.js) style modules resolver",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
-  "keywords": [
-    "cjs",
-    "modules",
-    "bundle",
-    "browserify",
-    "webpack"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/medikoo/cjs-module.git"
-  },
+  "keywords": ["cjs", "modules", "bundle", "browserify", "webpack"],
+  "repository": { "type": "git", "url": "git://github.com/medikoo/cjs-module.git" },
   "dependencies": {
     "builtin-modules": "^1.1.1",
     "es5-ext": "^0.10.23",
@@ -28,13 +19,7 @@
     "eslint-config-medikoo-es3": "1",
     "eslint-config-medikoo-es5": "^1.4"
   },
-  "eslintConfig": {
-    "extends": "medikoo-es5",
-    "root": true,
-    "env": {
-      "node": true
-    }
-  },
+  "eslintConfig": { "extends": "medikoo-es5", "root": true, "env": { "node": true } },
   "scripts": {
     "lint": "eslint --ignore-path=.gitignore .",
     "test": "node node_modules/tad/bin/tad"
