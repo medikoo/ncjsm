@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/medikoo/cjs-module/compare/v1.2.2...v1.3.0) (2018-05-14)
+
+
+### Features
+
+* requireUncached util ([1f79012](https://github.com/medikoo/cjs-module/commit/1f79012))
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/medikoo/cjs-module/compare/v1.2.1...v1.2.2) (2017-09-18)
 
