@@ -6,18 +6,18 @@
   "keywords": ["cjs", "modules", "bundle", "browserify", "webpack"],
   "repository": { "type": "git", "url": "git://github.com/medikoo/cjs-module.git" },
   "dependencies": {
-    "builtin-modules": "^1.1.1",
-    "es5-ext": "^0.10.23",
+    "builtin-modules": "2",
+    "es5-ext": "^0.10.42",
     "es6-set": "^0.1.5",
     "find-requires": "^0.2.3",
-    "fs2": "^0.2.4"
+    "fs2": "^0.2.7"
   },
   "devDependencies": {
-    "deferred": "^0.7.8",
+    "deferred": "^0.7.9",
     "tad": "^0.2.7",
-    "eslint": "4",
+    "eslint": "^4.19.1",
     "eslint-config-medikoo-es3": "1",
-    "eslint-config-medikoo-es5": "^1.4"
+    "eslint-config-medikoo-es5": "^1.4.10"
   },
   "eslintConfig": { "extends": "medikoo-es5", "root": true, "env": { "node": true } },
   "scripts": {
