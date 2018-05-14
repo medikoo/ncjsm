@@ -1,3 +1,8 @@
+[![Build status][nix-build-image]][nix-build-url]
+[![Windows status][win-build-image]][win-build-url]
+![Transpilation status][transpilation-image]
+[![npm version][npm-image]][npm-url]
+
 # cjs-module
 
 ## CJS (Node.js) modules resolver
@@ -123,3 +128,11 @@ getDependencies(modulePath).done(function(deps) {
 ## Tests [![Build Status](https://travis-ci.org/medikoo/cjs-module.svg)](https://travis-ci.org/medikoo/cjs-module)
 
     $ npm test
+
+[nix-build-image]: https://semaphoreci.com/api/v1/medikoo-org/cjs-module/branches/master/shields_badge.svg
+[nix-build-url]: https://semaphoreci.com/medikoo-org/cjs-module
+[win-build-image]: https://ci.appveyor.com/api/projects/status/i68ocohu91ejv77k?svg=true
+[win-build-url]: https://ci.appveyor.com/project/medikoo/cjs-module
+[transpilation-image]: https://img.shields.io/badge/transpilation-free-brightgreen.svg
+[npm-image]: https://img.shields.io/npm/v/cjs-module.svg
+[npm-url]: https://www.npmjs.com/package/cjs-module
