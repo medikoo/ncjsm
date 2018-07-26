@@ -3,18 +3,19 @@
 module.exports = function (t, a) {
 	var pathA   = "./__playground/other"
 	  , pathB   = "./__playground/samename"
-	  , moduleA = require(pathA)
-	  , moduleB = require(pathB);
+	  , moduleA = require(pathA);
 
 	var moduleA2;
 
-	t(require.resolve(pathA), function () {
+	var innerModuleB = t([require.resolve(pathA), require.resolve(pathB)], function () {
 		moduleA2 = require(pathA);
 		a.not(moduleA2, moduleA);
-		a(require(pathB), moduleB);
+		return require(pathB);
 	});
 
+	var moduleB = require(pathB);
 	a(require(pathA), moduleA);
+	a.not(moduleB, innerModuleB);
 
 	t([require.resolve(pathA), require.resolve(pathB)], function () {
 		var moduleA3 = require(pathA);

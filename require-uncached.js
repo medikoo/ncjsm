@@ -19,7 +19,6 @@ module.exports = function (moduleIds, callback) {
 	// 2. Cache currently cached module values
 	var cache = {};
 	moduleIds.forEach(function (moduleId) {
-		if (!hasOwnProperty.call(require.cache, moduleId)) return;
 		cache[moduleId] = require.cache[moduleId];
 		delete require.cache[moduleId];
 	});
@@ -28,7 +27,10 @@ module.exports = function (moduleIds, callback) {
 		// 3. Run callback
 		return callback();
 	} finally {
-		// 4. Bring back cached values
-		objForEach(cache, function (value, moduleId) { require.cache[moduleId] = value; });
+		// 4. Restore state
+		objForEach(cache, function (value, moduleId) {
+			if (value) require.cache[moduleId] = value;
+			else delete require.cache[moduleId];
+		});
 	}
 };
