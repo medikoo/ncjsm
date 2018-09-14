@@ -2,12 +2,8 @@
 
 "use strict";
 
-var dirname = function (path) {
-	return path.slice(0, path.lastIndexOf("/")) || "/";
-};
-var join = function (path1, path2) {
-	return path1 === "/" ? path1 + path2 : path1 + "/" + path2;
-};
+var dirname = function (path) { return path.slice(0, path.lastIndexOf("/")) || "/"; };
+var join = function (path1, path2) { return path1 === "/" ? path1 + path2 : path1 + "/" + path2; };
 
 module.exports = function (extensions, confirmFile, resolvePackageMain) {
 	var resolveFile = function (path, extIndex) {
