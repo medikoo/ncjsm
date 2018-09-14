@@ -9,6 +9,7 @@
         "null": "ignore"
       }
     ],
+    "max-lines-per-function": "off",
     "no-eq-null": "off"
   }
 }
