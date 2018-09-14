@@ -16,17 +16,17 @@
   },
   "dependencies": {
     "builtin-modules": "2",
-    "es5-ext": "^0.10.42",
+    "es5-ext": "^0.10.46",
     "es6-set": "^0.1.5",
     "find-requires": "^0.2.3",
-    "fs2": "^0.2.7"
+    "fs2": "^0.2.10"
   },
   "devDependencies": {
     "deferred": "^0.7.9",
-    "tad": "^0.2.7",
-    "eslint": "^4.19.1",
-    "eslint-config-medikoo-es3": "1",
-    "eslint-config-medikoo-es5": "^1.4.10"
+    "tad": "^0.2.8",
+    "eslint": "^5.5",
+    "eslint-config-medikoo-es3": "^1.1.1",
+    "eslint-config-medikoo-es5": "^1.7"
   },
   "eslintConfig": {
     "extends": "medikoo-es5",
