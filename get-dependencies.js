@@ -26,9 +26,7 @@ var getDirectDependencies = function (modulePath) {
 					"Could not find " + JSON.stringify(depPath) + " in dir " + JSON.stringify(dir)
 				);
 			});
-		})(function (paths) {
-			return uniq.call(paths).filter(Boolean);
-		});
+		})(function (paths) { return uniq.call(paths).filter(Boolean); });
 	});
 };
 
@@ -37,8 +35,6 @@ module.exports = function (programPath) {
 	var paths = Object.create(null);
 	return (function self(modulePath) {
 		if (paths[modulePath]) return null;
-		return paths[modulePath] = getDirectDependencies(modulePath).map(self);
-	}(programPath))(function () {
-		return Object.keys(paths);
-	});
+		return (paths[modulePath] = getDirectDependencies(modulePath).map(self));
+	}(programPath))(function () { return Object.keys(paths); });
 };
