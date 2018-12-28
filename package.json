@@ -1,6 +1,6 @@
 {
   "name": "cjs-module",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "CJS (Node.js) style modules resolver",
   "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
   "keywords": [
