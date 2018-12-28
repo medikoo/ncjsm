@@ -20,13 +20,13 @@
     "es5-ext": "^0.10.46",
     "es6-set": "^0.1.5",
     "find-requires": "^0.2.3",
-    "fs2": "^0.2.10"
+    "fs2": "^0.2.21"
   },
   "devDependencies": {
     "tad": "^0.2.8",
-    "eslint": "^5.5",
+    "eslint": "^5.11.1",
     "eslint-config-medikoo-es3": "^1.1.1",
-    "eslint-config-medikoo-es5": "^1.7.1"
+    "eslint-config-medikoo-es5": "^1.7.3"
   },
   "eslintConfig": {
     "extends": "medikoo-es5",
