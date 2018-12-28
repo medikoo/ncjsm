@@ -23,7 +23,10 @@ var getDirectDependencies = function (modulePath) {
 			return cjsResolve(dir, depPath)(function (path) {
 				if (path) return path;
 				throw new Error(
-					"Could not find " + JSON.stringify(depPath) + " in dir " + JSON.stringify(dir)
+					"Could not resolve " +
+						JSON.stringify(depPath) +
+						" module, required in " +
+						JSON.stringify(modulePath)
 				);
 			});
 		})(function (paths) { return uniq.call(paths).filter(Boolean); });
