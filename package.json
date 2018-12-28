@@ -16,13 +16,13 @@
   },
   "dependencies": {
     "builtin-modules": "2",
+    "deferred": "^0.7.10",
     "es5-ext": "^0.10.46",
     "es6-set": "^0.1.5",
     "find-requires": "^0.2.3",
     "fs2": "^0.2.10"
   },
   "devDependencies": {
-    "deferred": "^0.7.9",
     "tad": "^0.2.8",
     "eslint": "^5.5",
     "eslint-config-medikoo-es3": "^1.1.1",
