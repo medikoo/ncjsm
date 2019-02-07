@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.6.0](https://github.com/medikoo/ncjsm/compare/v1.5.0...v1.6.0) (2019-02-07)
+
+
+### Features
+
+* rename cjs-module to ncjsm ([743b95c](https://github.com/medikoo/ncjsm/commit/743b95c))
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/medikoo/cjs-module/compare/v1.4.1...v1.5.0) (2018-12-28)
 
