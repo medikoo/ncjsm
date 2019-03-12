@@ -15,7 +15,7 @@
 		"url": "medikoo/ncjsm"
 	},
 	"dependencies": {
-		"builtin-modules": "^2.0.0",
+		"builtin-modules": "^3.0.0",
 		"deferred": "^0.7.10",
 		"es5-ext": "^0.10.49",
 		"es6-set": "^0.1.5",
