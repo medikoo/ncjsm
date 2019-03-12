@@ -14,19 +14,28 @@ const nonLocalChar = new Set([".", "/"]);
 const getDirectDependencies = function (modulePath) {
 	return readFile(modulePath)(content => {
 		const dir = dirname(modulePath);
-		return deferred.map(uniq.call(findRequires(content)), depPath => {
-			if (!nonLocalChar.has(depPath[0]) && builtinModules.has(depPath.split("/")[0])) {
-				return null;
+		return deferred.map(
+			uniq.call(
+				findRequires(content, {
+					setupCode: `var __filename = ${ JSON.stringify(modulePath) }, __dirname = ${
+						JSON.stringify(dir)
+					};`
+				})
+			),
+			depPath => {
+				if (!nonLocalChar.has(depPath[0]) && builtinModules.has(depPath.split("/")[0])) {
+					return null;
+				}
+				return cjsResolve(dir, depPath)(path => {
+					if (path) return path;
+					throw new Error(
+						`Could not resolve ${ JSON.stringify(depPath) } module, required in ${
+							JSON.stringify(modulePath)
+						}`
+					);
+				});
 			}
-			return cjsResolve(dir, depPath)(path => {
-				if (path) return path;
-				throw new Error(
-					`Could not resolve ${ JSON.stringify(depPath) } module, required in ${
-						JSON.stringify(modulePath)
-					}`
-				);
-			});
-		})(paths => uniq.call(paths).filter(Boolean));
+		)(paths => uniq.call(paths).filter(Boolean));
 	});
 };
 
