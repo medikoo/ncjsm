@@ -2,8 +2,6 @@
 
 "use strict";
 
-var resolveRoot = require("./lib/resolve-root");
+const resolveRoot = require("./lib/resolve-root");
 
-module.exports = function (path) {
- return resolveRoot(path);
-};
+module.exports = function (path) { return resolveRoot(path); };

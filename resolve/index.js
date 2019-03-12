@@ -2,38 +2,33 @@
 
 "use strict";
 
-var getResolver = require("../lib/get-node-resolver")
-  , resolve     = require("path").resolve
-  , stat        = require("fs2/stat")
-  , readFile    = require("fs2/read-file")
-  , parse       = JSON.parse;
+const getResolver = require("../lib/get-node-resolver")
+    , { resolve } = require("path")
+    , stat        = require("fs2/stat")
+    , readFile    = require("fs2/read-file");
+
+const { parse } = JSON;
 
 module.exports = getResolver(
-	function (path) {
+	path => {
 		path = resolve(path);
 		return stat(path)(
-			function (stats) {
-				return stats.isFile() ? path : null;
-			},
-			function (e) {
+			stats => (stats.isFile() ? path : null),
+			e => {
 				if (e.code === "ENOENT") return null;
 				throw e;
 			}
 		);
 	},
-	function (path) {
-		return readFile(resolve(path, "package.json"))(
-			function (data) {
-				try {
-					return parse(data).main;
-				} catch (e) {
-					return null;
-				}
+	path =>
+		readFile(resolve(path, "package.json"))(
+			data => {
+				try { return parse(data).main; }
+				catch (e) { return null; }
 			},
-			function (e) {
+			e => {
 				if (e.code === "ENOENT") return null;
 				throw e;
 			}
-		);
-	}
+		)
 );

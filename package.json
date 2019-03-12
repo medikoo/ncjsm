@@ -24,12 +24,12 @@
   },
   "devDependencies": {
     "eslint": "^5.15.1",
+    "eslint-config-medikoo": "^2.1.1",
     "eslint-config-medikoo-es3": "^1.1.1",
-    "eslint-config-medikoo-es5": "^1.7.3",
     "tad": "^0.2.8"
   },
   "eslintConfig": {
-    "extends": "medikoo-es5",
+    "extends": "medikoo",
     "root": true,
     "env": {
       "node": true

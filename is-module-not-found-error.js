@@ -3,7 +3,9 @@
 
 "use strict";
 
-var pathToken = ":path", pattern;
+const pathToken = ":path";
+
+let pattern;
 
 try { require(pathToken); }
 catch (e) { pattern = e.message; }

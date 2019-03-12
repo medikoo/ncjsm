@@ -1,10 +1,10 @@
 "use strict";
 
-var aFrom          = require("es5-ext/array/from")
-  , objForEach     = require("es5-ext/object/for-each")
-  , isObject       = require("es5-ext/object/is-object")
-  , ensureFunction = require("es5-ext/object/ensure-plain-function")
-  , ensureString   = require("es5-ext/object/validate-stringifiable-value");
+const aFrom          = require("es5-ext/array/from")
+    , objForEach     = require("es5-ext/object/for-each")
+    , isObject       = require("es5-ext/object/is-object")
+    , ensureFunction = require("es5-ext/object/ensure-plain-function")
+    , ensureString   = require("es5-ext/object/validate-stringifiable-value");
 
 module.exports = function (moduleIds, callback) {
 	// 1. Validate & resolve input
@@ -17,8 +17,8 @@ module.exports = function (moduleIds, callback) {
 	ensureFunction(callback);
 
 	// 2. Cache currently cached module values
-	var cache = {};
-	moduleIds.forEach(function (moduleId) {
+	const cache = {};
+	moduleIds.forEach(moduleId => {
 		cache[moduleId] = require.cache[moduleId];
 		delete require.cache[moduleId];
 	});
@@ -28,7 +28,7 @@ module.exports = function (moduleIds, callback) {
 		return callback();
 	} finally {
 		// 4. Restore state
-		objForEach(cache, function (value, moduleId) {
+		objForEach(cache, (value, moduleId) => {
 			if (value) require.cache[moduleId] = value;
 			else delete require.cache[moduleId];
 		});

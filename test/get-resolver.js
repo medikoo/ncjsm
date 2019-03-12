@@ -2,42 +2,31 @@
 
 "use strict";
 
-var resolve  = require("path").resolve
-  , PassThru = require("../utils/pass-thru");
+const { resolve } = require("path")
+    , PassThru    = require("../utils/pass-thru");
 
-var existingFiles = [
-	"/project/foo.js",
-	"/project/other.js",
-	"/project/other/index.js",
-	"/project/samename",
-	"/project/samename.js",
-	"/project/samename.json",
-	"/project/dir/subdir/bar.js",
-	"/project/dir/lorem.js",
-	"/project/otherdir/esli.js",
-	"/project/node_modules/outer/boo.js",
-	"/project/node_modules/outer/raz.js",
-	"/project/node_modules/outer/node_modules/nested/elo.js",
+const existingFiles = [
+	"/project/foo.js", "/project/other.js", "/project/other/index.js", "/project/samename",
+	"/project/samename.js", "/project/samename.json", "/project/dir/subdir/bar.js",
+	"/project/dir/lorem.js", "/project/otherdir/esli.js", "/project/node_modules/outer/boo.js",
+	"/project/node_modules/outer/raz.js", "/project/node_modules/outer/node_modules/nested/elo.js",
 	"/project/node_modules/outer3/index.js"
 ];
 existingFiles.includes = require("es5-ext/array/#/contains");
 
-var existingMains = {
-	"/project/dir": "lorem",
-	"/project/node_modules/outer": "raz"
-};
+const existingMains = { "/project/dir": "lorem", "/project/node_modules/outer": "raz" };
 
-var isFile = function (path) {
+const isFile = function (path) {
 	path = resolve(path);
 	return new PassThru(existingFiles.includes(path) ? path : null);
 };
 
-var resolvePackageMain = function (path) {
+const resolvePackageMain = function (path) {
 	return new PassThru(existingMains[resolve(path)] || null);
 };
 
 module.exports = function (t, a) {
-	var resolver = t([".js", ".json"], isFile, resolvePackageMain);
+	const resolver = t([".js", ".json"], isFile, resolvePackageMain);
 	a(resolver("/", "elo").value, null);
 	a(resolver("/", "foo").value, null);
 	a(resolver("/", "outer/boo").value, null);

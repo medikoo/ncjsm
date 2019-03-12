@@ -2,17 +2,16 @@
 
 "use strict";
 
-var resolve     = require("path").resolve
-  , fs          = require("fs")
-  , PassThru    = require("../utils/pass-thru")
-  , getResolver = require("../lib/get-node-resolver")
-  , stat        = fs.statSync
-  , readFile    = fs.readFileSync
-  , parse       = JSON.parse;
+const { resolve }                                = require("path")
+    , { statSync: stat, readFileSync: readFile } = require("fs")
+    , PassThru                                   = require("../utils/pass-thru")
+    , getResolver                                = require("../lib/get-node-resolver");
 
-var resolver = getResolver(
-	function (path) {
-		var stats;
+const { parse } = JSON;
+
+const resolver = getResolver(
+	path => {
+		let stats;
 		path = resolve(path);
 		try {
 			stats = stat(path);
@@ -22,23 +21,18 @@ var resolver = getResolver(
 		}
 		return new PassThru(stats.isFile() ? path : null);
 	},
-	function (path) {
-		var data, result;
+	path => {
+		let data, result;
 		try {
 			data = readFile(resolve(path, "package.json"));
 		} catch (e) {
 			if (e.code === "ENOENT") return new PassThru(null);
 			throw e;
 		}
-		try {
-			result = parse(data).main;
-		} catch (e) {
-			result = null;
-		}
+		try { result = parse(data).main; }
+		catch (e) { result = null; }
 		return new PassThru(result);
 	}
 );
 
-module.exports = function (dir, path) {
-	return resolver(dir, path).value;
-};
+module.exports = function (dir, path) { return resolver(dir, path).value; };
