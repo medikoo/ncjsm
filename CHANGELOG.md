@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.1](https://github.com/medikoo/ncjsm/compare/v2.0.0...v2.0.1) (2019-03-18)
+
+### Bug Fixes
+
+-   ensure ES5 support in requireUncached ([bab908d](https://github.com/medikoo/ncjsm/commit/bab908d))
+
 # [2.0.0](https://github.com/medikoo/ncjsm/compare/v1.6.0...v2.0.0) (2019-03-12)
 
 ### Features
