@@ -2,6 +2,7 @@
 
 const uniq                 = require("es5-ext/array/#/uniq")
     , ensureString         = require("type/string/ensure")
+    , isObject             = require("type/object/is")
     , deferred             = require("deferred")
     , { dirname, resolve } = require("path")
     , readFile             = require("fs2/read-file")
@@ -11,7 +12,7 @@ const uniq                 = require("es5-ext/array/#/uniq")
 
 const nonLocalChar = new Set([".", "/"]);
 
-const getDirectDependencies = function (modulePath) {
+const getDirectDependencies = function (modulePath, options) {
 	return readFile(modulePath)(content => {
 		const dir = dirname(modulePath);
 		return deferred.map(
@@ -28,6 +29,7 @@ const getDirectDependencies = function (modulePath) {
 				}
 				return cjsResolve(dir, depPath)(path => {
 					if (path) return path;
+					if (options.ignoreMissing) return null;
 					throw new Error(
 						`Could not resolve ${ JSON.stringify(depPath) } module, required in ${
 							JSON.stringify(modulePath)
@@ -39,11 +41,12 @@ const getDirectDependencies = function (modulePath) {
 	});
 };
 
-module.exports = function (programPath) {
+module.exports = function (programPath, options = {}) {
+	if (!isObject(options)) options = {};
 	programPath = resolve(ensureString(programPath));
 	const paths = Object.create(null);
 	return (function self(modulePath) {
 		if (paths[modulePath]) return null;
-		return (paths[modulePath] = getDirectDependencies(modulePath).map(self));
+		return (paths[modulePath] = getDirectDependencies(modulePath, options).map(self));
 	})(programPath)(() => Object.keys(paths));
 };
