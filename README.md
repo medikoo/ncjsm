@@ -10,10 +10,10 @@
 Environment agnostic (Node.js) CJS modules resolver.  
 It implements a _strict_ version of Node.js modules resolution logic, differences are as follows:
 
--   [Loading from global folders](https://nodejs.org/api/all.html#all_loading_from_the_global_folders) is not supported
--   Only Unix path separators (`/`) are supported in require's _path_ arguments (_Background: even though Node.js internally seems to follow Windows path separator in Windows environment, it won't work in \*nix environments, and even in Window env it's [not reliable](https://github.com/nodejs/node/issues/6049) so by all means should be avoided_)
--   There's no awareness of node.js [core modules](https://nodejs.org/api/all.html#all_core_modules)
-    e.g. `resolve(dir, 'fs')` will naturally result with _null_
+- [Loading from global folders](https://nodejs.org/api/all.html#all_loading_from_the_global_folders) is not supported
+- Only Unix path separators (`/`) are supported in require's _path_ arguments (_Background: even though Node.js internally seems to follow Windows path separator in Windows environment, it won't work in \*nix environments, and even in Window env it's [not reliable](https://github.com/nodejs/node/issues/6049) so by all means should be avoided_)
+- There's no awareness of node.js [core modules](https://nodejs.org/api/all.html#all_core_modules)
+  e.g. `resolve(dir, 'fs')` will naturally result with _null_
 
 ### Installation
 
@@ -25,11 +25,11 @@ It implements a _strict_ version of Node.js modules resolution logic, difference
 
 For provided configuration, returns a CJS modules resolver:
 
--   **extensions** - List of supported file extensions in order of singificance, e.g. for Node.js it would be `['.js', '.json', '.node']`
--   **confirmFile** - a `confirmFile(filepath)` function. Confirms whether there's a module at provided (not normalized, absolute) file path. Returns promise-like object which resolves with either normalized full path of a module or null (if there's no module for given path).  
-    Although result is expected to be a promise-like object, resolution can be synchronous.
--   **resolvePackageMain** - a `resolvePackageMain(dirpath)` function. Returns value of _package.json_'s `main` property for given path. Returns promise-like object which resolves with either resolved value, or null, when either `package.json` file was not found, or it didn't have _main_ property.  
-    Same as with `confirmFile` resolution can be synchronous.
+- **extensions** - List of supported file extensions in order of singificance, e.g. for Node.js it would be `['.js', '.json', '.node']`
+- **confirmFile** - a `confirmFile(filepath)` function. Confirms whether there's a module at provided (not normalized, absolute) file path. Returns promise-like object which resolves with either normalized full path of a module or null (if there's no module for given path).  
+  Although result is expected to be a promise-like object, resolution can be synchronous.
+- **resolvePackageMain** - a `resolvePackageMain(dirpath)` function. Returns value of _package.json_'s `main` property for given path. Returns promise-like object which resolves with either resolved value, or null, when either `package.json` file was not found, or it didn't have _main_ property.  
+  Same as with `confirmFile` resolution can be synchronous.
 
 #### resolve(dir, path)
 
@@ -43,12 +43,12 @@ full module path becomes a resolved value.
 var resolve = require("ncjsm/resolve");
 
 // Asynchronously resolve path for 'foo' module against current path
-resolve(__dirname, "foo").done(function(fooModulePath) {
-	if (!fooModulePath) {
-		// 'foo' module doesn't exist
-	} else {
-		// 'foo' module found at fooModulePath
-	}
+resolve(__dirname, "foo").done(function (fooModulePath) {
+  if (!fooModulePath) {
+    // 'foo' module doesn't exist
+  } else {
+    // 'foo' module found at fooModulePath
+  }
 });
 ```
 
@@ -65,9 +65,9 @@ var resolveSync = require("ncjsm/resolve/sync");
 // Synchronously resolve path for 'foo' module against current path
 var fooModulePath = resolveSync(__dirname, "foo");
 if (!fooModulePath) {
-	// 'foo' module doesn't exist
+  // 'foo' module doesn't exist
 } else {
-	// 'foo' module found
+  // 'foo' module found
 }
 ```
 
@@ -78,10 +78,10 @@ Whether provided path is a root of a package
 ```javascript
 var isPackageRoot = require("ncjsm/is-package-root");
 
-isPackageRoot(dirPath).done(function(isRoot) {
-	if (isRoot) {
-		// Provided path is package root
-	}
+isPackageRoot(dirPath).done(function (isRoot) {
+  if (isRoot) {
+    // Provided path is package root
+  }
 });
 ```
 
@@ -92,10 +92,10 @@ Resolve package root path for provided path. It is about resolution of first upp
 ```javascript
 var resolvePackageRoot = require("ncjsm/resolve-package-root");
 
-resolvePackageRoot(dirPath).done(function(root) {
-	if (!root) {
-		// Provided path is not located in any package
-	}
+resolvePackageRoot(dirPath).done(function (root) {
+  if (!root) {
+    // Provided path is not located in any package
+  }
 });
 ```
 
@@ -106,10 +106,10 @@ Resolve project root path for provided path. It is about resolution of topmost p
 ```javascript
 var resolveProjectRoot = require("ncjsm/resolve-project-root");
 
-resolveProjectRoot(dirPath).done(function(root) {
-	if (!root) {
-		// Provided path is not located in any project
-	}
+resolveProjectRoot(dirPath).done(function (root) {
+  if (!root) {
+    // Provided path is not located in any project
+  }
 });
 ```
 
@@ -122,8 +122,8 @@ Paths to native Node.js modules are ignored. If file for given module cannot be 
 ```javascript
 var getDependencies = require("ncjsm/get-dependencies");
 
-getDependencies(modulePath).done(function(deps) {
-	console.log(deps); // e.g. [pathToModulePath, pathToDep1, pathToDep2, ...pathToDepn]
+getDependencies(modulePath).done(function (deps) {
+  console.log(deps); // e.g. [pathToModulePath, pathToDep1, pathToDep2, ...pathToDepn]
 });
 ```
 
