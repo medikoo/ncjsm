@@ -3,8 +3,8 @@
 var aFrom          = require("es5-ext/array/from")
   , objForEach     = require("es5-ext/object/for-each")
   , isObject       = require("es5-ext/object/is-object")
-  , ensureFunction = require("es5-ext/object/ensure-plain-function")
-  , ensureString   = require("es5-ext/object/validate-stringifiable-value");
+  , ensureFunction = require("type/plain-function/ensure")
+  , ensureString   = require("type/string/ensure");
 
 module.exports = function (moduleIds, callback) {
 	// 1. Validate & resolve input

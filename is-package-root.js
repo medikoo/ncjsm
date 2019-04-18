@@ -1,6 +1,6 @@
 "use strict";
 
-const ensureString = require("es5-ext/object/validate-stringifiable-value")
+const ensureString = require("type/string/ensure")
     , deferred     = require("deferred")
     , { resolve }  = require("path")
     , stat         = require("fs2/stat");

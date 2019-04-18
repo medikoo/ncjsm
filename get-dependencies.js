@@ -1,7 +1,7 @@
 "use strict";
 
 const uniq                 = require("es5-ext/array/#/uniq")
-    , ensureString         = require("es5-ext/object/validate-stringifiable-value")
+    , ensureString         = require("type/string/ensure")
     , deferred             = require("deferred")
     , { dirname, resolve } = require("path")
     , readFile             = require("fs2/read-file")

@@ -20,7 +20,8 @@
 		"es5-ext": "^0.10.49",
 		"es6-set": "^0.1.5",
 		"find-requires": "^1.0.0",
-		"fs2": "^0.3.4"
+		"fs2": "^0.3.4",
+		"type": "^1.0.1"
 	},
 	"devDependencies": {
 		"eslint": "^5.16.0",

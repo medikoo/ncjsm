@@ -1,6 +1,6 @@
 "use strict";
 
-const ensureString = require("es5-ext/object/validate-stringifiable-value");
+const ensureString = require("type/string/ensure");
 
 module.exports = function (path) {
 	let pathChar;
