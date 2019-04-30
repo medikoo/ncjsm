@@ -32,7 +32,7 @@
 		"husky": "^2.1.0",
 		"lint-staged": "^8.1.5",
 		"prettier-elastic": "^1.17.0",
-		"tad": "^2.0.0"
+		"tad": "^2.0.1"
 	},
 	"husky": {
 		"hooks": {
