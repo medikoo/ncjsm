@@ -5,9 +5,14 @@
 
 var pathToken = ":path", pattern;
 
+var resolveMessage = function (error) {
+	var newLineIndex = error.message.indexOf("\n");
+	return newLineIndex > 0 ? error.message.slice(0, newLineIndex) : error.message;
+};
+
 try { require(pathToken); }
-catch (e) { pattern = e.message; }
+catch (e) { pattern = resolveMessage(e); }
 
 module.exports = function (error, path) {
-	return error.message === pattern.replace(pathToken, path);
+	return resolveMessage(error) === pattern.replace(pathToken, path);
 };
