@@ -11,7 +11,7 @@ var resolveMessage = function (error) {
 };
 
 try { require(pathToken); }
-catch (e) { pattern = resolveMessage(e); }
+catch (error) { pattern = resolveMessage(error); }
 
 module.exports = function (error, path) {
 	return resolveMessage(error) === pattern.replace(pathToken, path);
