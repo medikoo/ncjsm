@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [2.2.0](https://github.com/medikoo/ncjsm/compare/v2.1.0...v2.2.0) (2019-04-30)
+
+### Bug Fixes
+
+- Fix isModuleNotFound crash in Node.js v12 ([c9b9cc8](https://github.com/medikoo/ncjsm/commit/c9b9cc8))
+
+### Features
+
+- Bring ES3 support to isModuleNotFoundError ([e6d0132](https://github.com/medikoo/ncjsm/commit/e6d0132))
+
 # [2.1.0](https://github.com/medikoo/ncjsm/compare/v2.0.1...v2.1.0) (2019-04-18)
 
 ### Features

@@ -1,6 +1,6 @@
 {
 	"name": "ncjsm",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"description": "CJS (Node.js) style modules resolver",
 	"author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
 	"keywords": [
