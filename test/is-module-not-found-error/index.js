@@ -2,7 +2,7 @@
 
 const { resolve } = require("path");
 
-const pg = resolve(__dirname, "./__playground/is-module-not-found-error");
+const pg = resolve(__dirname, "../__playground/is-module-not-found-error");
 
 module.exports = function (t, a) {
 	let path;
