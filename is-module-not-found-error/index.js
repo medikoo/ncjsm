@@ -3,6 +3,8 @@
 
 "use strict";
 
+var ensureString = require("type/string/ensure");
+
 var pathToken = ":path", pattern;
 
 var resolveMessage = function (error) {
@@ -14,5 +16,7 @@ try { require(pathToken); }
 catch (error) { pattern = resolveMessage(error); }
 
 module.exports = function (error, path) {
+	path = ensureString(path);
+	if (!error || typeof error.message !== "string") return false;
 	return resolveMessage(error) === pattern.replace(pathToken, path);
 };
