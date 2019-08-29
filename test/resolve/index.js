@@ -72,6 +72,14 @@ module.exports = function (t, a, d) {
 		}),
 		t(`${ pgDir }/node_modules/outer/node_modules/nested`, "outer3").then(value => {
 			a(value, resolve(`${ pgDir }/node_modules/outer3/index.js`));
+		}),
+
+		// Symlink tests
+		t(pgDir, "./valid-link").then(value => { a(value, resolve(`${ pgDir }/valid-link.js`)); }),
+		t(pgDir, "./deep-link").then(value => { a(value, resolve(`${ pgDir }/deep-link.js`)); }),
+		t(pgDir, "./invalid-link").then(value => a(value, null)),
+		t(pgDir, "./invalid-link-with-a-fallback").then(value => {
+			a(value, resolve(`${ pgDir }/invalid-link-with-a-fallback.json`));
 		})
 	).done(() => { d(); }, d);
 };

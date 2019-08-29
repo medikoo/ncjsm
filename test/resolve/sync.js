@@ -52,4 +52,13 @@ module.exports = function (t, a) {
 		t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer3"),
 		resolve(`${ playgroundDir }/node_modules/outer3/index.js`)
 	);
+
+	// Symlink tests
+	a(t(playgroundDir, "./valid-link"), resolve(`${ playgroundDir }/valid-link.js`));
+	a(t(playgroundDir, "./deep-link"), resolve(`${ playgroundDir }/deep-link.js`));
+	a(t(playgroundDir, "./invalid-link"), null);
+	a(
+		t(playgroundDir, "./invalid-link-with-a-fallback"),
+		resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`)
+	);
 };
