@@ -1,6 +1,7 @@
 "use strict";
 
 const { resolve } = require("path");
+const { setup, teardown } = require("../_lib/setup-playground-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
 
@@ -57,11 +58,16 @@ module.exports = async (t, a) => {
 	);
 
 	// Symlink tests
-	a(await t(playgroundDir, "./valid-link"), resolve(`${ playgroundDir }/valid-link.js`));
-	a(await t(playgroundDir, "./deep-link"), resolve(`${ playgroundDir }/deep-link.js`));
-	a(await t(playgroundDir, "./invalid-link"), null);
-	a(
-		await t(playgroundDir, "./invalid-link-with-a-fallback"),
-		resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`)
-	);
+	await setup();
+	try {
+		a(await t(playgroundDir, "./valid-link"), resolve(`${ playgroundDir }/valid-link.js`));
+		a(await t(playgroundDir, "./deep-link"), resolve(`${ playgroundDir }/deep-link.js`));
+		a(await t(playgroundDir, "./invalid-link"), null);
+		a(
+			await t(playgroundDir, "./invalid-link-with-a-fallback"),
+			resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`)
+		);
+	} finally {
+		await teardown();
+	}
 };

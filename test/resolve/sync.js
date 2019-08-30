@@ -1,10 +1,11 @@
 "use strict";
 
 const { resolve } = require("path");
+const { setup, teardown } = require("../_lib/setup-playground-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
 
-module.exports = function (t, a) {
+module.exports = async (t, a) => {
 	a(t(playgroundDir, "./foo"), resolve(`${ playgroundDir }/foo.js`));
 	a(t(playgroundDir, "./foo.js"), resolve(`${ playgroundDir }/foo.js`));
 	a(t(playgroundDir, "./foo.json"), null);
@@ -54,11 +55,16 @@ module.exports = function (t, a) {
 	);
 
 	// Symlink tests
-	a(t(playgroundDir, "./valid-link"), resolve(`${ playgroundDir }/valid-link.js`));
-	a(t(playgroundDir, "./deep-link"), resolve(`${ playgroundDir }/deep-link.js`));
-	a(t(playgroundDir, "./invalid-link"), null);
-	a(
-		t(playgroundDir, "./invalid-link-with-a-fallback"),
-		resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`)
-	);
+	await setup();
+	try {
+		a(t(playgroundDir, "./valid-link"), resolve(`${ playgroundDir }/valid-link.js`));
+		a(t(playgroundDir, "./deep-link"), resolve(`${ playgroundDir }/deep-link.js`));
+		a(t(playgroundDir, "./invalid-link"), null);
+		a(
+			t(playgroundDir, "./invalid-link-with-a-fallback"),
+			resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`)
+		);
+	} finally {
+		await teardown();
+	}
 };
