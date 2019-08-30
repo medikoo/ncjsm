@@ -1,73 +1,118 @@
+/* eslint max-lines: "off" */
+
 "use strict";
 
-const { resolve } = require("path");
-const { setup, teardown } = require("../_lib/setup-playground-symlinks");
+const noop                = require("es5-ext/function/noop")
+    , { resolve }         = require("path")
+    , { setup, teardown } = require("../_lib/setup-playground-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
 
-module.exports = async (t, a) => {
-	a(await t(playgroundDir, "./foo"), resolve(`${ playgroundDir }/foo.js`));
-	a(await t(playgroundDir, "./foo.js"), resolve(`${ playgroundDir }/foo.js`));
-	a(await t(playgroundDir, "./foo.json"), null);
-	a(await t(playgroundDir, "./other"), resolve(`${ playgroundDir }/other.js`));
-	a(await t(playgroundDir, "./other/"), resolve(`${ playgroundDir }/other/index.js`));
-	a(await t(playgroundDir, "./samename"), resolve(`${ playgroundDir }/samename`));
-	a(await t(playgroundDir, "./samename.js"), resolve(`${ playgroundDir }/samename.js`));
-	a(await t(playgroundDir, "./samename.json"), resolve(`${ playgroundDir }/samename.json`));
-	a(await t(playgroundDir, "./samename"), resolve(`${ playgroundDir }/samename`));
-	a(await t(playgroundDir, "./dir"), resolve(`${ playgroundDir }/dir/lorem.js`));
-	a(await t(playgroundDir, "./dir/lorem"), resolve(`${ playgroundDir }/dir/lorem.js`));
-	a(await t(playgroundDir, "./dir/subdir/bar"), resolve(`${ playgroundDir }/dir/subdir/bar.js`));
-	a(await t(`${ playgroundDir }/dir`, "."), resolve(`${ playgroundDir }/dir/lorem.js`));
-	a(await t(`${ playgroundDir }/dir`, "./"), resolve(`${ playgroundDir }/dir/lorem.js`));
-	a(await t(`${ playgroundDir }/dir`, "./lorem"), resolve(`${ playgroundDir }/dir/lorem.js`));
-	a(await t(`${ playgroundDir }/dir`, "../other"), resolve(`${ playgroundDir }/other.js`));
-	a(await t(`${ playgroundDir }/dir`, "../other/"), resolve(`${ playgroundDir }/other/index.js`));
-	a(await t(`${ playgroundDir }/dir/subdir`, "../"), resolve(`${ playgroundDir }/dir/lorem.js`));
-	a(await t(`${ playgroundDir }/dir/subdir`, "../../foo"), resolve(`${ playgroundDir }/foo.js`));
-	a(await t(playgroundDir, "outer"), resolve(`${ playgroundDir }/node_modules/outer/raz.js`));
-	a(await t(playgroundDir, "outer/boo"), resolve(`${ playgroundDir }/node_modules/outer/boo.js`));
-	a(await t(playgroundDir, "outer/boo.json"), null);
-	a(await t(playgroundDir, "outer3"), resolve(`${ playgroundDir }/node_modules/outer3/index.js`));
-	a(
-		await t(playgroundDir, "pkg-main-dir"),
-		resolve(`${ playgroundDir }/node_modules/pkg-main-dir/lib/index.js`)
-	);
-	a(await t(playgroundDir, "nested/elo"), null);
-	a(
-		await t(`${ playgroundDir }/node_modules/outer`, "outer3"),
-		resolve(`${ playgroundDir }/node_modules/outer3/index.js`)
-	);
-	a(await t(`${ playgroundDir }/node_modules/outer`, "project/foo"), null);
-	a(
-		await t(`${ playgroundDir }/node_modules/outer`, "nested/elo"),
-		resolve(`${ playgroundDir }/node_modules/outer/node_modules/nested/elo.js`)
-	);
-	a(await t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "project/foo"), null);
-	a(
-		await t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer"),
-		resolve(`${ playgroundDir }/node_modules/outer/raz.js`)
-	);
-	a(
-		await t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer/boo"),
-		resolve(`${ playgroundDir }/node_modules/outer/boo.js`)
-	);
-	a(
-		await t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer3"),
-		resolve(`${ playgroundDir }/node_modules/outer3/index.js`)
-	);
+module.exports = (t, a) =>
+	Promise.all([
+		t(playgroundDir, "./foo").then(value => {
+			a(value, resolve(`${ playgroundDir }/foo.js`));
+		}),
+		t(playgroundDir, "./foo.js").then(value => {
+			a(value, resolve(`${ playgroundDir }/foo.js`));
+		}),
+		t(playgroundDir, "./foo.json").then(value => { a(value, null); }),
+		t(playgroundDir, "./other").then(value => {
+			a(value, resolve(`${ playgroundDir }/other.js`));
+		}),
+		t(playgroundDir, "./other/").then(value => {
+			a(value, resolve(`${ playgroundDir }/other/index.js`));
+		}),
+		t(playgroundDir, "./samename").then(value => {
+			a(value, resolve(`${ playgroundDir }/samename`));
+		}),
+		t(playgroundDir, "./samename.js").then(value => {
+			a(value, resolve(`${ playgroundDir }/samename.js`));
+		}),
+		t(playgroundDir, "./samename.json").then(value => {
+			a(value, resolve(`${ playgroundDir }/samename.json`));
+		}),
+		t(playgroundDir, "./samename").then(value => {
+			a(value, resolve(`${ playgroundDir }/samename`));
+		}),
+		t(playgroundDir, "./dir").then(value => {
+			a(value, resolve(`${ playgroundDir }/dir/lorem.js`));
+		}),
+		t(playgroundDir, "./dir/lorem").then(value => {
+			a(value, resolve(`${ playgroundDir }/dir/lorem.js`));
+		}),
+		t(playgroundDir, "./dir/subdir/bar").then(value => {
+			a(value, resolve(`${ playgroundDir }/dir/subdir/bar.js`));
+		}),
+		t(`${ playgroundDir }/dir`, ".").then(value => {
+			a(value, resolve(`${ playgroundDir }/dir/lorem.js`));
+		}),
+		t(`${ playgroundDir }/dir`, "./").then(value => {
+			a(value, resolve(`${ playgroundDir }/dir/lorem.js`));
+		}),
+		t(`${ playgroundDir }/dir`, "./lorem").then(value => {
+			a(value, resolve(`${ playgroundDir }/dir/lorem.js`));
+		}),
+		t(`${ playgroundDir }/dir`, "../other").then(value => {
+			a(value, resolve(`${ playgroundDir }/other.js`));
+		}),
+		t(`${ playgroundDir }/dir`, "../other/").then(value => {
+			a(value, resolve(`${ playgroundDir }/other/index.js`));
+		}),
+		t(`${ playgroundDir }/dir/subdir`, "../").then(value => {
+			a(value, resolve(`${ playgroundDir }/dir/lorem.js`));
+		}),
+		t(`${ playgroundDir }/dir/subdir`, "../../foo").then(value => {
+			a(value, resolve(`${ playgroundDir }/foo.js`));
+		}),
+		t(playgroundDir, "outer").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/outer/raz.js`));
+		}),
+		t(playgroundDir, "outer/boo").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/outer/boo.js`));
+		}),
+		t(playgroundDir, "outer/boo.json").then(value => { a(value, null); }),
+		t(playgroundDir, "outer3").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/outer3/index.js`));
+		}),
+		t(playgroundDir, "pkg-main-dir").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/pkg-main-dir/lib/index.js`));
+		}),
+		t(playgroundDir, "nested/elo").then(value => { a(value, null); }),
+		t(`${ playgroundDir }/node_modules/outer`, "outer3").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/outer3/index.js`));
+		}),
+		t(`${ playgroundDir }/node_modules/outer`, "project/foo").then(value => {
+			a(value, null);
+		}),
+		t(`${ playgroundDir }/node_modules/outer`, "nested/elo").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/outer/node_modules/nested/elo.js`));
+		}),
+		t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "project/foo").then(
+			value => { a(value, null); }
+		),
+		t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/outer/raz.js`));
+		}),
+		t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer/boo").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/outer/boo.js`));
+		}),
+		t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer3").then(value => {
+			a(value, resolve(`${ playgroundDir }/node_modules/outer3/index.js`));
+		}),
 
-	// Symlink tests
-	await setup();
-	try {
-		a(await t(playgroundDir, "./valid-link"), resolve(`${ playgroundDir }/valid-link.js`));
-		a(await t(playgroundDir, "./deep-link"), resolve(`${ playgroundDir }/deep-link.js`));
-		a(await t(playgroundDir, "./invalid-link"), null);
-		a(
-			await t(playgroundDir, "./invalid-link-with-a-fallback"),
-			resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`)
-		);
-	} finally {
-		await teardown();
-	}
-};
+		setup().then(() =>
+			Promise.all([
+				t(playgroundDir, "./valid-link").then(value => {
+					a(value, resolve(`${ playgroundDir }/valid-link.js`));
+				}),
+				t(playgroundDir, "./deep-link").then(value => {
+					a(value, resolve(`${ playgroundDir }/deep-link.js`));
+				}),
+				t(playgroundDir, "./invalid-link").then(value => a(value, null)),
+				t(playgroundDir, "./invalid-link-with-a-fallback").then(value => {
+					a(value, resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`));
+				})
+			]).then(teardown, error => teardown.then(() => { throw error; }))
+		)
+	]).then(noop);
