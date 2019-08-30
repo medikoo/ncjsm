@@ -24,7 +24,7 @@
 		"type": "^1.0.3"
 	},
 	"devDependencies": {
-		"eslint": "^5.16.0",
+		"eslint": "^6.2.2",
 		"eslint-config-medikoo": "^2.5.1",
 		"eslint-config-medikoo-es3": "^2.2.0",
 		"eslint-config-medikoo-es5": "^2.0.0",
