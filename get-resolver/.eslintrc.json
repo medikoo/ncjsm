@@ -1,5 +1,5 @@
 {
-	"extends": "medikoo-es3",
+	"extends": "medikoo/es3",
 	"root": true,
 	"rules": {
 		"eqeqeq": ["error", "always", { "null": "ignore" }],

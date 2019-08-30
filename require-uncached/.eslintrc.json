@@ -1,1 +1,1 @@
-{ "extends": "medikoo-es5", "root": true }
+{ "extends": "medikoo/es5", "root": true }
