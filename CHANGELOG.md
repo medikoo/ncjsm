@@ -1,6 +1,33 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.0.0](https://github.com/medikoo/ncjsm/compare/v2.3.0...v3.0.0) (2019-09-02)
+
+### Features
+
+- Change resolve return value format ([747493e](https://github.com/medikoo/ncjsm/commit/747493e))
+- Expose realPath on resolve return object ([5ad6b23](https://github.com/medikoo/ncjsm/commit/5ad6b23))
+
+### Tests
+
+- Configure directory links tests ([988c92a](https://github.com/medikoo/ncjsm/commit/988c92a))
+- Cover symlink cases in resolve tests ([c97d4a0](https://github.com/medikoo/ncjsm/commit/c97d4a0))
+- Fix symlink type ([a371ed0](https://github.com/medikoo/ncjsm/commit/a371ed0))
+- Improve naming ([81785d6](https://github.com/medikoo/ncjsm/commit/81785d6))
+- Improve var name ([523498a](https://github.com/medikoo/ncjsm/commit/523498a))
+- Improve var naming ([e48b5f0](https://github.com/medikoo/ncjsm/commit/e48b5f0))
+- Maintain support for Node.js v6 ([3341664](https://github.com/medikoo/ncjsm/commit/3341664))
+- Make symlink tests portable to windows ([0b57b2a](https://github.com/medikoo/ncjsm/commit/0b57b2a))
+- Refactor to async/await ([6f20188](https://github.com/medikoo/ncjsm/commit/6f20188))
+- Rename util ([55a6d6f](https://github.com/medikoo/ncjsm/commit/55a6d6f))
+- Skip symlink tests if not capable to create them ([53cc946](https://github.com/medikoo/ncjsm/commit/53cc946))
+
+### BREAKING CHANGES
+
+- 'resolve', and 'resolve/sync' utils now resolve with objects that
+  expose path on `targetPath` property
+  (so far path was returned directly)
 
 # [2.3.0](https://github.com/medikoo/ncjsm/compare/v2.2.0...v2.3.0) (2019-04-30)
 
