@@ -4,7 +4,7 @@
 
 const noop                = require("es5-ext/function/noop")
     , { resolve }         = require("path")
-    , { setup, teardown } = require("../_lib/setup-playground-symlinks");
+    , { setup, teardown } = require("../_lib/setup-playground-file-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
 

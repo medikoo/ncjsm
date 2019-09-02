@@ -1,7 +1,7 @@
 "use strict";
 
 const { resolve } = require("path");
-const { setup, teardown } = require("../_lib/setup-playground-symlinks");
+const { setup, teardown } = require("../_lib/setup-playground-file-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
 
