@@ -2,9 +2,13 @@
 
 "use strict";
 
-const noop                = require("es5-ext/function/noop")
-    , { resolve }         = require("path")
-    , { setup, teardown } = require("../_lib/setup-playground-file-symlinks");
+const noop        = require("es5-ext/function/noop")
+    , { resolve } = require("path");
+
+const {
+	setup: setupFileLinks,
+	teardown: teardownFileLinks
+} = require("../_lib/setup-playground-file-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
 
@@ -101,7 +105,7 @@ module.exports = (t, a) =>
 			a(value, resolve(`${ playgroundDir }/node_modules/outer3/index.js`));
 		}),
 
-		setup().then(() =>
+		setupFileLinks().then(() =>
 			Promise.all([
 				t(playgroundDir, "./valid-file-link").then(value => {
 					a(value, resolve(`${ playgroundDir }/valid-file-link.js`));
@@ -113,6 +117,6 @@ module.exports = (t, a) =>
 				t(playgroundDir, "./invalid-file-link-with-a-fallback").then(value => {
 					a(value, resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`));
 				})
-			]).then(teardown, error => teardown.then(() => { throw error; }))
+			]).then(teardownFileLinks, error => teardownFileLinks.then(() => { throw error; }))
 		)
 	]).then(noop);

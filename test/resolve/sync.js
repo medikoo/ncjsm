@@ -1,7 +1,11 @@
 "use strict";
 
 const { resolve } = require("path");
-const { setup, teardown } = require("../_lib/setup-playground-file-symlinks");
+
+const {
+	setup: setupFileLinks,
+	teardown: teardownFileLinks
+} = require("../_lib/setup-playground-file-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
 
@@ -55,7 +59,7 @@ module.exports = (t, a) => {
 	);
 
 	// Symlink tests
-	return setup().then(() => {
+	return setupFileLinks().then(() => {
 		let testError, teardownPromise;
 		try {
 			a(
@@ -74,7 +78,7 @@ module.exports = (t, a) => {
 		} catch (error) {
 			testError = error;
 		} finally {
-			teardownPromise = teardown();
+			teardownPromise = teardownFileLinks();
 		}
 		return teardownPromise.then(() => { if (testError) throw testError; });
 	});
