@@ -110,19 +110,33 @@ module.exports = (t, a) =>
 			a(value, resolve(`${ playgroundDir }/node_modules/outer3/index.js`));
 		}),
 
-		setupFileLinks().then(() =>
-			Promise.all([
-				t(playgroundDir, "./valid-file-link").then(value => {
-					a(value, resolve(`${ playgroundDir }/valid-file-link.js`));
-				}),
-				t(playgroundDir, "./deep-file-link").then(value => {
-					a(value, resolve(`${ playgroundDir }/deep-file-link.js`));
-				}),
-				t(playgroundDir, "./invalid-file-link").then(value => a(value, null)),
-				t(playgroundDir, "./invalid-file-link-with-a-fallback").then(value => {
-					a(value, resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`));
-				})
-			]).then(teardownFileLinks, error => teardownFileLinks.then(() => { throw error; }))
+		setupFileLinks().then(
+			() =>
+				Promise.all([
+					t(playgroundDir, "./valid-file-link").then(value => {
+						a(value, resolve(`${ playgroundDir }/valid-file-link.js`));
+					}),
+					t(playgroundDir, "./deep-file-link").then(value => {
+						a(value, resolve(`${ playgroundDir }/deep-file-link.js`));
+					}),
+					t(playgroundDir, "./invalid-file-link").then(value => a(value, null)),
+					t(playgroundDir, "./invalid-file-link-with-a-fallback").then(value => {
+						a(
+							value,
+							resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`)
+						);
+					})
+				]).then(teardownFileLinks, error => teardownFileLinks.then(() => { throw error; })),
+			error => {
+				if (error.code === "EPERM") {
+					process.stdout.write(
+						"Warning: Could not test file symlinks due to not suffient " +
+							"process permissions to create them\n"
+					);
+					return;
+				}
+				throw error;
+			}
 		),
 
 		setupDirLinks().then(() =>

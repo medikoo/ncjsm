@@ -68,29 +68,41 @@ module.exports = (t, a) => {
 
 	// Symlink tests
 	return Promise.all([
-		setupFileLinks().then(() => {
-			let testError, teardownPromise;
-			try {
-				a(
-					t(playgroundDir, "./valid-file-link"),
-					resolve(`${ playgroundDir }/valid-file-link.js`)
-				);
-				a(
-					t(playgroundDir, "./deep-file-link"),
-					resolve(`${ playgroundDir }/deep-file-link.js`)
-				);
-				a(t(playgroundDir, "./invalid-file-link"), null);
-				a(
-					t(playgroundDir, "./invalid-file-link-with-a-fallback"),
-					resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`)
-				);
-			} catch (error) {
-				testError = error;
-			} finally {
-				teardownPromise = teardownFileLinks();
+		setupFileLinks().then(
+			() => {
+				let testError, teardownPromise;
+				try {
+					a(
+						t(playgroundDir, "./valid-file-link"),
+						resolve(`${ playgroundDir }/valid-file-link.js`)
+					);
+					a(
+						t(playgroundDir, "./deep-file-link"),
+						resolve(`${ playgroundDir }/deep-file-link.js`)
+					);
+					a(t(playgroundDir, "./invalid-file-link"), null);
+					a(
+						t(playgroundDir, "./invalid-file-link-with-a-fallback"),
+						resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`)
+					);
+				} catch (error) {
+					testError = error;
+				} finally {
+					teardownPromise = teardownFileLinks();
+				}
+				return teardownPromise.then(() => { if (testError) throw testError; });
+			},
+			error => {
+				if (error.code === "EPERM") {
+					process.stdout.write(
+						"Warning: Could not test file symlinks due to not suffient " +
+							"process permissions to create them\n"
+					);
+					return;
+				}
+				throw error;
 			}
-			return teardownPromise.then(() => { if (testError) throw testError; });
-		}),
+		),
 		setupDirLinks().then(() => {
 			let testError, teardownPromise;
 			try {
