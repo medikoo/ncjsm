@@ -36,8 +36,11 @@ For provided configuration, returns a CJS modules resolver:
 _Node.js resolver_
 
 Asynchronously resolves module path against provided directory path.
-Returns promise. If no matching module was found, promise resolves with `null` otherwise
-full module path is exposed on `targetPath` property of resolved object
+Returns promise. If no matching module was found, promise resolves with `null` .
+If module is found, then promise resolves with an object, containing two properties:
+
+- `targetPath` - A path at which module was resolved
+- `realPath` - Real path of resolved module (if targetPath involves symlinks then realPath will be different)
 
 ```javascript
 var resolve = require("ncjsm/resolve");
@@ -57,7 +60,7 @@ resolve(__dirname, "foo").done(function (pathData) {
 _Node.js resolver_
 
 Synchronously resolves module path against provided directory path.
-If matching module was found then full module path is on `targetPath` property of resolved object, otherwise `null` is resolved
+If matching module was found then object with `targetPath` and `realPath` properties is returned.
 
 ```javascript
 var resolveSync = require("ncjsm/resolve/sync");

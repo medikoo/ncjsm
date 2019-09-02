@@ -2,24 +2,26 @@
 
 "use strict";
 
-const { resolve }                                = require("path")
-    , { statSync: stat, readFileSync: readFile } = require("fs")
-    , PassThru                                   = require("../utils/pass-thru")
-    , getResolver                                = require("../lib/get-node-resolver");
+const { resolve } = require("path")
+    , PassThru    = require("../utils/pass-thru")
+    , getResolver = require("../lib/get-node-resolver");
+
+const { statSync: stat, readFileSync: readFile, realpathSync: realpath } = require("fs");
 
 const { parse } = JSON;
 
 const resolver = getResolver(
-	path => {
+	targetPath => {
 		let stats;
-		path = resolve(path);
+		targetPath = resolve(targetPath);
 		try {
-			stats = stat(path);
+			stats = stat(targetPath);
 		} catch (e) {
 			if (e.code === "ENOENT") return new PassThru(null);
 			throw e;
 		}
-		return new PassThru(stats.isFile() ? { targetPath: path } : null);
+		if (stats.isFile()) return new PassThru({ targetPath, realPath: realpath(targetPath) });
+		return new PassThru(null);
 	},
 	path => {
 		let data, result;
