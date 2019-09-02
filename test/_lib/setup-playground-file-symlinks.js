@@ -4,7 +4,7 @@ const { resolve } = require("path")
     , symlink     = require("fs2/symlink")
     , unlink      = require("fs2/unlink");
 
-const playgroundDir = resolve(__dirname, "../__playground"), symlinkOptions = { type: "junction" };
+const playgroundDir = resolve(__dirname, "../__playground"), symlinkOptions = { type: "file" };
 
 const links = [
 	{
