@@ -37,14 +37,14 @@ _Node.js resolver_
 
 Asynchronously resolves module path against provided directory path.
 Returns promise. If no matching module was found, promise resolves with `null` otherwise
-full module path becomes a resolved value.
+full module path is exposed on `targetPath` property of resolved object
 
 ```javascript
 var resolve = require("ncjsm/resolve");
 
 // Asynchronously resolve path for 'foo' module against current path
-resolve(__dirname, "foo").done(function (fooModulePath) {
-  if (!fooModulePath) {
+resolve(__dirname, "foo").done(function (pathData) {
+  if (!pathData) {
     // 'foo' module doesn't exist
   } else {
     // 'foo' module found at fooModulePath
@@ -57,7 +57,7 @@ resolve(__dirname, "foo").done(function (fooModulePath) {
 _Node.js resolver_
 
 Synchronously resolves module path against provided directory path.
-If matching module was found then full module path is returned, otherwise `null`.
+If matching module was found then full module path is on `targetPath` property of resolved object, otherwise `null` is resolved
 
 ```javascript
 var resolveSync = require("ncjsm/resolve/sync");

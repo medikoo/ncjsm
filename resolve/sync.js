@@ -19,7 +19,7 @@ const resolver = getResolver(
 			if (e.code === "ENOENT") return new PassThru(null);
 			throw e;
 		}
-		return new PassThru(stats.isFile() ? path : null);
+		return new PassThru(stats.isFile() ? { targetPath: path } : null);
 	},
 	path => {
 		let data, result;

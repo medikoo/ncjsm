@@ -13,7 +13,7 @@ module.exports = getResolver(
 	path => {
 		path = resolve(path);
 		return stat(path)(
-			stats => (stats.isFile() ? path : null),
+			stats => (stats.isFile() ? { targetPath: path } : null),
 			e => {
 				if (e.code === "ENOENT") return null;
 				throw e;

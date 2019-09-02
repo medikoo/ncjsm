@@ -27,8 +27,8 @@ const getDirectDependencies = function (modulePath, options) {
 				if (!nonLocalChar.has(depPath[0]) && builtinModules.has(depPath.split("/")[0])) {
 					return null;
 				}
-				return cjsResolve(dir, depPath)(path => {
-					if (path) return path;
+				return cjsResolve(dir, depPath)(pathData => {
+					if (pathData) return pathData.targetPath;
 					if (options.ignoreMissing) return null;
 					throw new Error(
 						`Could not resolve ${ JSON.stringify(depPath) } module, required in ${
