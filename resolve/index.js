@@ -12,7 +12,7 @@ const { parse } = JSON;
 module.exports = getResolver(
 	path => {
 		path = resolve(path);
-		return stat(path)(
+		return stat(path).then(
 			stats => (stats.isFile() ? { targetPath: path } : null),
 			e => {
 				if (e.code === "ENOENT") return null;
