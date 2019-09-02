@@ -103,15 +103,15 @@ module.exports = (t, a) =>
 
 		setup().then(() =>
 			Promise.all([
-				t(playgroundDir, "./valid-link").then(value => {
-					a(value, resolve(`${ playgroundDir }/valid-link.js`));
+				t(playgroundDir, "./valid-file-link").then(value => {
+					a(value, resolve(`${ playgroundDir }/valid-file-link.js`));
 				}),
-				t(playgroundDir, "./deep-link").then(value => {
-					a(value, resolve(`${ playgroundDir }/deep-link.js`));
+				t(playgroundDir, "./deep-file-link").then(value => {
+					a(value, resolve(`${ playgroundDir }/deep-file-link.js`));
 				}),
-				t(playgroundDir, "./invalid-link").then(value => a(value, null)),
-				t(playgroundDir, "./invalid-link-with-a-fallback").then(value => {
-					a(value, resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`));
+				t(playgroundDir, "./invalid-file-link").then(value => a(value, null)),
+				t(playgroundDir, "./invalid-file-link-with-a-fallback").then(value => {
+					a(value, resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`));
 				})
 			]).then(teardown, error => teardown.then(() => { throw error; }))
 		)

@@ -7,14 +7,20 @@ const { resolve } = require("path")
 const playgroundDir = resolve(__dirname, "../__playground"), symlinkOptions = { type: "junction" };
 
 const links = [
-	{ destination: resolve(playgroundDir, "another-deep-link.js"), source: "deep-link-target.js" },
-	{ destination: resolve(playgroundDir, "deep-link.js"), source: "another-deep-link.js" },
 	{
-		destination: resolve(playgroundDir, "invalid-link-with-a-fallback.js"),
+		destination: resolve(playgroundDir, "another-deep-file-link.js"),
+		source: "deep-file-link-target.js"
+	},
+	{
+		destination: resolve(playgroundDir, "deep-file-link.js"),
+		source: "another-deep-file-link.js"
+	},
+	{
+		destination: resolve(playgroundDir, "invalid-file-link-with-a-fallback.js"),
 		source: "non-existing-file.js"
 	},
-	{ destination: resolve(playgroundDir, "invalid-link.js"), source: "non-existing-file.js" },
-	{ destination: resolve(playgroundDir, "valid-link.js"), source: "link-target.js" }
+	{ destination: resolve(playgroundDir, "invalid-file-link.js"), source: "non-existing-file.js" },
+	{ destination: resolve(playgroundDir, "valid-file-link.js"), source: "file-link-target.js" }
 ];
 
 module.exports = {

@@ -58,12 +58,18 @@ module.exports = (t, a) => {
 	return setup().then(() => {
 		let testError, teardownPromise;
 		try {
-			a(t(playgroundDir, "./valid-link"), resolve(`${ playgroundDir }/valid-link.js`));
-			a(t(playgroundDir, "./deep-link"), resolve(`${ playgroundDir }/deep-link.js`));
-			a(t(playgroundDir, "./invalid-link"), null);
 			a(
-				t(playgroundDir, "./invalid-link-with-a-fallback"),
-				resolve(`${ playgroundDir }/invalid-link-with-a-fallback.json`)
+				t(playgroundDir, "./valid-file-link"),
+				resolve(`${ playgroundDir }/valid-file-link.js`)
+			);
+			a(
+				t(playgroundDir, "./deep-file-link"),
+				resolve(`${ playgroundDir }/deep-file-link.js`)
+			);
+			a(t(playgroundDir, "./invalid-file-link"), null);
+			a(
+				t(playgroundDir, "./invalid-file-link-with-a-fallback"),
+				resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`)
 			);
 		} catch (error) {
 			testError = error;
