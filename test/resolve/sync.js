@@ -1,11 +1,19 @@
+/* eslint max-lines: "off" */
+
 "use strict";
 
-const { resolve } = require("path");
+const noop        = require("es5-ext/function/noop")
+    , { resolve } = require("path");
 
 const {
 	setup: setupFileLinks,
 	teardown: teardownFileLinks
 } = require("../_lib/setup-playground-file-symlinks");
+
+const {
+	setup: setupDirLinks,
+	teardown: teardownDirLinks
+} = require("../_lib/setup-playground-dir-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
 
@@ -59,27 +67,48 @@ module.exports = (t, a) => {
 	);
 
 	// Symlink tests
-	return setupFileLinks().then(() => {
-		let testError, teardownPromise;
-		try {
-			a(
-				t(playgroundDir, "./valid-file-link"),
-				resolve(`${ playgroundDir }/valid-file-link.js`)
-			);
-			a(
-				t(playgroundDir, "./deep-file-link"),
-				resolve(`${ playgroundDir }/deep-file-link.js`)
-			);
-			a(t(playgroundDir, "./invalid-file-link"), null);
-			a(
-				t(playgroundDir, "./invalid-file-link-with-a-fallback"),
-				resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`)
-			);
-		} catch (error) {
-			testError = error;
-		} finally {
-			teardownPromise = teardownFileLinks();
-		}
-		return teardownPromise.then(() => { if (testError) throw testError; });
-	});
+	return Promise.all([
+		setupFileLinks().then(() => {
+			let testError, teardownPromise;
+			try {
+				a(
+					t(playgroundDir, "./valid-file-link"),
+					resolve(`${ playgroundDir }/valid-file-link.js`)
+				);
+				a(
+					t(playgroundDir, "./deep-file-link"),
+					resolve(`${ playgroundDir }/deep-file-link.js`)
+				);
+				a(t(playgroundDir, "./invalid-file-link"), null);
+				a(
+					t(playgroundDir, "./invalid-file-link-with-a-fallback"),
+					resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`)
+				);
+			} catch (error) {
+				testError = error;
+			} finally {
+				teardownPromise = teardownFileLinks();
+			}
+			return teardownPromise.then(() => { if (testError) throw testError; });
+		}),
+		setupDirLinks().then(() => {
+			let testError, teardownPromise;
+			try {
+				a(
+					t(playgroundDir, "./valid-dir-link"),
+					resolve(`${ playgroundDir }/valid-dir-link/index.js`)
+				);
+				a(
+					t(playgroundDir, "./deep-dir-link"),
+					resolve(`${ playgroundDir }/deep-dir-link/index.js`)
+				);
+				a(t(playgroundDir, "./invalid-dir-link"), null);
+			} catch (error) {
+				testError = error;
+			} finally {
+				teardownPromise = teardownDirLinks();
+			}
+			return teardownPromise.then(() => { if (testError) throw testError; });
+		})
+	]).then(noop);
 };

@@ -10,6 +10,11 @@ const {
 	teardown: teardownFileLinks
 } = require("../_lib/setup-playground-file-symlinks");
 
+const {
+	setup: setupDirLinks,
+	teardown: teardownDirLinks
+} = require("../_lib/setup-playground-dir-symlinks");
+
 const playgroundDir = resolve(__dirname, "../__playground");
 
 module.exports = (t, a) =>
@@ -118,5 +123,17 @@ module.exports = (t, a) =>
 					a(value, resolve(`${ playgroundDir }/invalid-file-link-with-a-fallback.json`));
 				})
 			]).then(teardownFileLinks, error => teardownFileLinks.then(() => { throw error; }))
+		),
+
+		setupDirLinks().then(() =>
+			Promise.all([
+				t(playgroundDir, "./valid-dir-link").then(value => {
+					a(value, resolve(`${ playgroundDir }/valid-dir-link/index.js`));
+				}),
+				t(playgroundDir, "./deep-dir-link").then(value => {
+					a(value, resolve(`${ playgroundDir }/deep-dir-link/index.js`));
+				}),
+				t(playgroundDir, "./invalid-dir-link").then(value => a(value, null))
+			]).then(teardownDirLinks, error => teardownDirLinks.then(() => { throw error; }))
 		)
 	]).then(noop);
