@@ -10,7 +10,7 @@ module.exports = function (moduleIds, callback) {
 	// 1. Validate & resolve input
 	if (isObject(moduleIds)) {
 		moduleIds = aFrom(moduleIds);
-		if (!moduleIds) throw new TypeError("Minimum one moduleId is required");
+		if (!moduleIds.length) throw new TypeError("Minimum one moduleId is required");
 	} else {
 		moduleIds = [ensureString(moduleIds)];
 	}
