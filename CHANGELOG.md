@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/medikoo/ncjsm/compare/v3.0.0...v4.0.0) (2019-10-08)
+
+### Bug Fixes
+
+- Fix requireUncached moduleIds validation ([eb2e026](https://github.com/medikoo/ncjsm/commit/eb2e026))
+
+### Features
+
+- By default crash resolve with MODULE_NOT_FOUND if module not found ([0e446c4](https://github.com/medikoo/ncjsm/commit/0e446c4))
+
+### BREAKING CHANGES
+
+- `resolve` and `resolve/sync` now by default crash with MODULE_NOT_FOUND error, if module is not found. Old behavior was that `null` was returned.
+  To maintain old behavior { silent: true } option needs to be passed
+
 ## [3.0.0](https://github.com/medikoo/ncjsm/compare/v2.3.0...v3.0.0) (2019-09-02)
 
 ### Features
