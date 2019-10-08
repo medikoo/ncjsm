@@ -2,8 +2,9 @@
 
 "use strict";
 
-const noop        = require("es5-ext/function/noop")
-    , { resolve } = require("path");
+const noop                  = require("es5-ext/function/noop")
+    , { resolve }           = require("path")
+    , isModuleNotFoundError = require("../../is-module-not-found-error");
 
 const {
 	setup: setupFileLinks,
@@ -16,6 +17,8 @@ const {
 } = require("../_lib/setup-playground-dir-symlinks");
 
 const playgroundDir = resolve(__dirname, "../__playground");
+
+const unexpected = () => { throw new Error("Unexpected"); };
 
 module.exports = (t, a) =>
 	Promise.all([
@@ -31,7 +34,10 @@ module.exports = (t, a) =>
 				realPath: resolve(`${ playgroundDir }/foo.js`)
 			});
 		}),
-		t(playgroundDir, "./foo.json").then(value => { a(value, null); }),
+		t(playgroundDir, "./foo.json").then(unexpected, error => {
+			a(isModuleNotFoundError(error, "./foo.json"), true);
+		}),
+		t(playgroundDir, "./foo.json", { silent: true }).then(value => a(value, null)),
 		t(playgroundDir, "./other").then(value => {
 			a.deep(value, {
 				targetPath: resolve(`${ playgroundDir }/other.js`),
@@ -140,7 +146,9 @@ module.exports = (t, a) =>
 				realPath: resolve(`${ playgroundDir }/node_modules/outer/boo.js`)
 			});
 		}),
-		t(playgroundDir, "outer/boo.json").then(value => { a(value, null); }),
+		t(playgroundDir, "outer/boo.json").then(unexpected, error => {
+			a(isModuleNotFoundError(error, "outer/boo.json"), true);
+		}),
 		t(playgroundDir, "outer3").then(value => {
 			a.deep(value, {
 				targetPath: resolve(`${ playgroundDir }/node_modules/outer3/index.js`),
@@ -153,15 +161,17 @@ module.exports = (t, a) =>
 				realPath: resolve(`${ playgroundDir }/node_modules/pkg-main-dir/lib/index.js`)
 			});
 		}),
-		t(playgroundDir, "nested/elo").then(value => { a(value, null); }),
+		t(playgroundDir, "nested/elo").then(unexpected, error => {
+			a(isModuleNotFoundError(error, "nested/elo"), true);
+		}),
 		t(`${ playgroundDir }/node_modules/outer`, "outer3").then(value => {
 			a.deep(value, {
 				targetPath: resolve(`${ playgroundDir }/node_modules/outer3/index.js`),
 				realPath: resolve(`${ playgroundDir }/node_modules/outer3/index.js`)
 			});
 		}),
-		t(`${ playgroundDir }/node_modules/outer`, "project/foo").then(value => {
-			a(value, null);
+		t(`${ playgroundDir }/node_modules/outer`, "project/foo").then(unexpected, error => {
+			a(isModuleNotFoundError(error, "project/foo"), true);
 		}),
 		t(`${ playgroundDir }/node_modules/outer`, "nested/elo").then(value => {
 			a.deep(value, {
@@ -174,7 +184,8 @@ module.exports = (t, a) =>
 			});
 		}),
 		t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "project/foo").then(
-			value => { a(value, null); }
+			unexpected,
+			error => { a(isModuleNotFoundError(error, "project/foo"), true); }
 		),
 		t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer").then(value => {
 			a.deep(value, {
@@ -210,7 +221,9 @@ module.exports = (t, a) =>
 							realPath: resolve(`${ playgroundDir }/deep-file-link-target.js`)
 						});
 					}),
-					t(playgroundDir, "./invalid-file-link").then(value => a(value, null)),
+					t(playgroundDir, "./invalid-file-link").then(unexpected, error => {
+						a(isModuleNotFoundError(error, "./invalid-file-link"), true);
+					}),
 					t(playgroundDir, "./invalid-file-link-with-a-fallback").then(value => {
 						a.deep(value, {
 							targetPath: resolve(
@@ -248,7 +261,9 @@ module.exports = (t, a) =>
 						realPath: resolve(`${ playgroundDir }/deep-dir-link-target/index.js`)
 					});
 				}),
-				t(playgroundDir, "./invalid-dir-link").then(value => a(value, null))
+				t(playgroundDir, "./invalid-dir-link").then(unexpected, error => {
+					a(isModuleNotFoundError(error, "./invalid-dir-link"), true);
+				})
 			]).then(teardownDirLinks, error => teardownDirLinks.then(() => { throw error; }))
 		)
 	]).then(noop);

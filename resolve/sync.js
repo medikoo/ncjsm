@@ -37,4 +37,4 @@ const resolver = getResolver(
 	}
 );
 
-module.exports = function (dir, path) { return resolver(dir, path).value; };
+module.exports = function (dir, path, options = {}) { return resolver(dir, path, options).value; };

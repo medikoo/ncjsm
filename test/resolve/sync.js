@@ -2,8 +2,9 @@
 
 "use strict";
 
-const noop        = require("es5-ext/function/noop")
-    , { resolve } = require("path");
+const noop                  = require("es5-ext/function/noop")
+    , { resolve }           = require("path")
+    , isModuleNotFoundError = require("../../is-module-not-found-error");
 
 const {
 	setup: setupFileLinks,
@@ -26,7 +27,13 @@ module.exports = (t, a) => {
 		targetPath: resolve(`${ playgroundDir }/foo.js`),
 		realPath: resolve(`${ playgroundDir }/foo.js`)
 	});
-	a(t(playgroundDir, "./foo.json"), null);
+	try {
+		t(playgroundDir, "./foo.json");
+		throw new Error("Unexpected");
+	} catch (error) {
+		a(isModuleNotFoundError(error, "./foo.json"), true);
+	}
+	a(t(playgroundDir, "./foo.json", { silent: true }), null);
 	a.deep(t(playgroundDir, "./other"), {
 		targetPath: resolve(`${ playgroundDir }/other.js`),
 		realPath: resolve(`${ playgroundDir }/other.js`)
@@ -100,22 +107,42 @@ module.exports = (t, a) => {
 		targetPath: resolve(`${ playgroundDir }/node_modules/outer/boo.js`),
 		realPath: resolve(`${ playgroundDir }/node_modules/outer/boo.js`)
 	});
-	a(t(playgroundDir, "outer/boo.json"), null);
+	try {
+		t(playgroundDir, "outer/boo.json");
+		throw new Error("Unexpected");
+	} catch (error) {
+		a(isModuleNotFoundError(error, "outer/boo.json"), true);
+	}
 	a.deep(t(playgroundDir, "outer3"), {
 		targetPath: resolve(`${ playgroundDir }/node_modules/outer3/index.js`),
 		realPath: resolve(`${ playgroundDir }/node_modules/outer3/index.js`)
 	});
-	a(t(playgroundDir, "nested/elo"), null);
+	try {
+		t(playgroundDir, "nested/elo");
+		throw new Error("Unexpected");
+	} catch (error) {
+		a(isModuleNotFoundError(error, "nested/elo"), true);
+	}
 	a.deep(t(`${ playgroundDir }/node_modules/outer`, "outer3"), {
 		targetPath: resolve(`${ playgroundDir }/node_modules/outer3/index.js`),
 		realPath: resolve(`${ playgroundDir }/node_modules/outer3/index.js`)
 	});
-	a(t(`${ playgroundDir }/node_modules/outer`, "project/foo"), null);
+	try {
+		t(`${ playgroundDir }/node_modules/outer`, "project/foo");
+		throw new Error("Unexpected");
+	} catch (error) {
+		a(isModuleNotFoundError(error, "project/foo"), true);
+	}
 	a.deep(t(`${ playgroundDir }/node_modules/outer`, "nested/elo"), {
 		targetPath: resolve(`${ playgroundDir }/node_modules/outer/node_modules/nested/elo.js`),
 		realPath: resolve(`${ playgroundDir }/node_modules/outer/node_modules/nested/elo.js`)
 	});
-	a(t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "project/foo"), null);
+	try {
+		t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "project/foo");
+		throw new Error("Unexpected");
+	} catch (error) {
+		a(isModuleNotFoundError(error, "project/foo"), true);
+	}
 	a.deep(t(`${ playgroundDir }/node_modules/outer/node_modules/nested`, "outer"), {
 		targetPath: resolve(`${ playgroundDir }/node_modules/outer/raz.js`),
 		realPath: resolve(`${ playgroundDir }/node_modules/outer/raz.js`)
@@ -143,7 +170,12 @@ module.exports = (t, a) => {
 						targetPath: resolve(`${ playgroundDir }/deep-file-link.js`),
 						realPath: resolve(`${ playgroundDir }/deep-file-link-target.js`)
 					});
-					a(t(playgroundDir, "./invalid-file-link"), null);
+					try {
+						t(playgroundDir, "./invalid-file-link");
+						throw new Error("Unexpected");
+					} catch (error) {
+						a(isModuleNotFoundError(error, "./invalid-file-link"), true);
+					}
 					a.deep(t(playgroundDir, "./invalid-file-link-with-a-fallback"), {
 						targetPath: resolve(
 							`${ playgroundDir }/invalid-file-link-with-a-fallback.json`
@@ -181,7 +213,12 @@ module.exports = (t, a) => {
 					targetPath: resolve(`${ playgroundDir }/deep-dir-link/index.js`),
 					realPath: resolve(`${ playgroundDir }/deep-dir-link-target/index.js`)
 				});
-				a(t(playgroundDir, "./invalid-dir-link"), null);
+				try {
+					t(playgroundDir, "./invalid-dir-link");
+					throw new Error("Unexpected");
+				} catch (error) {
+					a(isModuleNotFoundError(error, "./invalid-dir-link"), true);
+				}
 			} catch (error) {
 				testError = error;
 			} finally {

@@ -36,21 +36,35 @@ For provided configuration, returns a CJS modules resolver:
 _Node.js resolver_
 
 Asynchronously resolves module path against provided directory path.
-Returns promise. If no matching module was found, promise resolves with `null` .
+Returns promise.
 If module is found, then promise resolves with an object, containing two properties:
 
 - `targetPath` - A path at which module was resolved
 - `realPath` - Real path of resolved module (if targetPath involves symlinks then realPath will be different)
 
+If no matching module was found, promise is rejected with `MODULE_NOT_FOUND` error (unless `silent: true` is passed with options (passed as third argument), then it resolves with `null`)
+
 ```javascript
-var resolve = require("ncjsm/resolve");
+const resolve = require("ncjsm/resolve");
 
 // Asynchronously resolve path for 'foo' module against current path
-resolve(__dirname, "foo").done(function (pathData) {
-  if (!pathData) {
-    // 'foo' module doesn't exist
-  } else {
+resolve(__dirname, "foo").then(
+  function (pathData) {
     // 'foo' module found at fooModulePath
+  },
+  function (error) {
+    if (error.code === "MODULE_NOT_FOUND") {
+      // 'foo' module doesn't exist
+    }
+  }
+);
+
+// `silent` option, prevents module not found rejections:
+resolve(__dirname, "foo", { silent: true }).then(function (pathData) {
+  if (pathData) {
+    // 'foo' module found at fooModulePath
+  } else {
+    // 'foo' module doesn't exist
   }
 });
 ```
@@ -59,18 +73,27 @@ resolve(__dirname, "foo").done(function (pathData) {
 
 _Node.js resolver_
 
-Synchronously resolves module path against provided directory path.
-If matching module was found then object with `targetPath` and `realPath` properties is returned.
+Synchronously resolves module path against provided directory path. Otherwise works same as `resolve`
 
 ```javascript
-var resolveSync = require("ncjsm/resolve/sync");
+const resolveSync = require("ncjsm/resolve/sync");
 
 // Synchronously resolve path for 'foo' module against current path
-var fooModulePath = resolveSync(__dirname, "foo");
-if (!fooModulePath) {
-  // 'foo' module doesn't exist
-} else {
+let fooModulePathData;
+try {
+  fooModulePathData = resolveSync(__dirname, "foo");
+  // 'foo' module found at fooModulePath
+} catch (error) {
+  if (error.code === "MODULE_NOT_FOUND") {
+    // 'foo' module doesn't exist
+  }
+}
+
+fooModulePathData = resolveSync(__dirname, "foo", { silent: true });
+if (fooModulePathData) {
   // 'foo' module found
+} else {
+  // 'foo' module doesn't exist
 }
 ```
 
