@@ -18,5 +18,6 @@ catch (error) { pattern = resolveMessage(error); }
 module.exports = function (error, path) {
 	path = ensureString(path);
 	if (!error || typeof error.message !== "string") return false;
+	if (error.code !== "MODULE_NOT_FOUND") return false;
 	return resolveMessage(error) === pattern.replace(pathToken, path);
 };
