@@ -121,6 +121,10 @@ module.exports = (t, a) => {
 		targetPath: resolve(`${ playgroundDir }/node_modules/pkg-main-dir/lib/index.js`),
 		realPath: resolve(`${ playgroundDir }/node_modules/pkg-main-dir/lib/index.js`)
 	});
+	a.deep(t(playgroundDir, "broken-main"), {
+		targetPath: resolve(`${ playgroundDir }/node_modules/broken-main/index.js`),
+		realPath: resolve(`${ playgroundDir }/node_modules/broken-main/index.js`)
+	});
 	try {
 		t(playgroundDir, "nested/elo");
 		throw new Error("Unexpected");

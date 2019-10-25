@@ -164,6 +164,12 @@ module.exports = (t, a) =>
 		t(playgroundDir, "nested/elo").then(unexpected, error => {
 			a(isModuleNotFoundError(error, "nested/elo"), true);
 		}),
+		t(playgroundDir, "broken-main").then(value => {
+			a.deep(value, {
+				targetPath: resolve(`${ playgroundDir }/node_modules/broken-main/index.js`),
+				realPath: resolve(`${ playgroundDir }/node_modules/broken-main/index.js`)
+			});
+		}),
 		t(`${ playgroundDir }/node_modules/outer`, "outer3").then(value => {
 			a.deep(value, {
 				targetPath: resolve(`${ playgroundDir }/node_modules/outer3/index.js`),
