@@ -21,7 +21,7 @@
 		"es6-set": "^0.1.5",
 		"find-requires": "^1.0.0",
 		"fs2": "^0.3.6",
-		"type": "^1.2.0"
+		"type": "^2.0.0"
 	},
 	"devDependencies": {
 		"eslint": "^6.5.1",
