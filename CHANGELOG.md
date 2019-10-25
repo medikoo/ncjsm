@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://github.com/medikoo/ncjsm/compare/v4.0.0...v4.0.1) (2019-10-25)
+
+### Bug Fixes
+
+- Fix main module resolution in case pkg.main leads to broken path ([331dd1c](https://github.com/medikoo/ncjsm/commit/331dd1c))
+
+### Tests
+
+- Add missing test ([2469fe9](https://github.com/medikoo/ncjsm/commit/2469fe9))
+
 ## [4.0.0](https://github.com/medikoo/ncjsm/compare/v3.0.0...v4.0.0) (2019-10-08)
 
 ### Bug Fixes
