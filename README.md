@@ -159,6 +159,10 @@ getDependencies(modulePath).done(function (deps) {
 
 If file for given module cannot be found then error is thrown. Set this to `true` to simply ignore not found modules
 
+###### `ignoreEsternal: false`
+
+By default all paths to all required modules are resolved. Resolution scope may be narrowed only to modules from same package (referenced via relative path), by settung this option to `true`
+
 ## Tests [![Build Status](https://travis-ci.org/medikoo/ncjsm.svg)](https://travis-ci.org/medikoo/ncjsm)
 
     $ npm test

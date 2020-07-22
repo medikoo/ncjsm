@@ -24,8 +24,9 @@ const getDirectDependencies = function (modulePath, options) {
 				})
 			),
 			depPath => {
-				if (!nonLocalChar.has(depPath[0]) && builtinModules.has(depPath.split("/")[0])) {
-					return null;
+				if (!nonLocalChar.has(depPath[0])) {
+					if (options.ignoreExternal) return null;
+					if (builtinModules.has(depPath.split("/")[0])) return null;
 				}
 				return cjsResolve(
 					dir, depPath
