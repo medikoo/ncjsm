@@ -17,10 +17,10 @@
 	"dependencies": {
 		"builtin-modules": "^3.1.0",
 		"deferred": "^0.7.11",
-		"es5-ext": "^0.10.51",
+		"es5-ext": "^0.10.53",
 		"es6-set": "^0.1.5",
 		"find-requires": "^1.0.0",
-		"fs2": "^0.3.6",
+		"fs2": "^0.3.8",
 		"type": "^2.0.0"
 	},
 	"devDependencies": {
@@ -29,7 +29,7 @@
 		"git-list-updated": "^1.2.1",
 		"husky": "^4.2.5",
 		"lint-staged": "^10.2.11",
-		"prettier-elastic": "^1.18.2",
+		"prettier-elastic": "^1.19.1",
 		"tad": "^3.0.1"
 	},
 	"husky": {
