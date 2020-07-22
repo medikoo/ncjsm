@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/medikoo/ncjsm/compare/v4.0.1...v4.1.0) (2020-07-22)
+
+### Features
+
+- `ignoreExternal` option for `getDependencies` ([158075b](https://github.com/medikoo/ncjsm/commit/158075bea3f66ac77bae5341fd474930172047a2))
+
 ### [4.0.1](https://github.com/medikoo/ncjsm/compare/v4.0.0...v4.0.1) (2019-10-25)
 
 ### Bug Fixes
