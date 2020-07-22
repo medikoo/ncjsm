@@ -139,11 +139,11 @@ resolveProjectRoot(dirPath).done(function (root) {
 });
 ```
 
-#### getDependecies(modulePath, options = { ignoreMissing: false })
+#### getDependecies(modulePath, options = { ... })
 
 Resolve all module dependencies. Returns promise that resolves with an array of paths, that includes path to input module and paths to all its dependencies (it includes deep dependencies, so also dependencies of the dependencies).
 
-Paths to native Node.js modules are ignored. If file for given module cannot be found then error is thrown, unless `{ ignoreMissing: true }` is passed with the options
+Paths to native Node.js modules are ignored.
 
 ```javascript
 var getDependencies = require("ncjsm/get-dependencies");
@@ -152,6 +152,12 @@ getDependencies(modulePath).done(function (deps) {
   console.log(deps); // e.g. [pathToModulePath, pathToDep1, pathToDep2, ...pathToDepn]
 });
 ```
+
+##### Supported `options`
+
+###### `ignoreMissing: false`
+
+If file for given module cannot be found then error is thrown. Set this to `true` to simply ignore not found modules
 
 ## Tests [![Build Status](https://travis-ci.org/medikoo/ncjsm.svg)](https://travis-ci.org/medikoo/ncjsm)
 
