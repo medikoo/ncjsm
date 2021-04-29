@@ -27,4 +27,12 @@ module.exports = function (t, a) {
 
 	a(require(pathA), moduleA);
 	a(require(pathB), moduleB);
+
+	t(() => {
+		const moduleA3 = require(pathA);
+		a.not(moduleA3, moduleA);
+		a.not(moduleA3, moduleA2);
+		const moduleB3 = require(pathB);
+		a.not(moduleB3, moduleB);
+	});
 };

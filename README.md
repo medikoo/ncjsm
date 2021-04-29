@@ -97,7 +97,7 @@ if (fooModulePathData) {
 }
 ```
 
-#### requireUnached(moduleIds, callback)
+#### requireUnached([moduleIds, ]callback)
 
 Create temporary environment where `require` of specific modules will not resolved the eventually cached verions
 
@@ -109,6 +109,18 @@ const firstCopyOfModule1 = require("./module1");
 var secondCopyOfModule2 = requireUnached([require.resolve("./module1")], function () {
   return require("./module1");
 });
+
+console.log(firstCopyOfModule1 === secondCopyOfModule2); // false
+```
+
+Alternatively we may resolve callback in completely cleared require cache, for that `moduleIds` argument should be skipped
+
+```javascript
+var requireUncached = require("ncjsm/require-uncached");
+
+const firstCopyOfModule1 = require("./module1");
+
+var secondCopyOfModule2 = requireUnached(function () { return require("./module1"); });
 
 console.log(firstCopyOfModule1 === secondCopyOfModule2); // false
 ```

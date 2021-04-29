@@ -1,27 +1,42 @@
 "use strict";
 
-var aFrom          = require("es5-ext/array/from")
-  , objForEach     = require("es5-ext/object/for-each")
-  , isObject       = require("es5-ext/object/is-object")
-  , ensureFunction = require("type/plain-function/ensure")
-  , ensureString   = require("type/string/ensure");
+var objForEach          = require("es5-ext/object/for-each")
+  , clear               = require("es5-ext/object/clear")
+  , isObject            = require("type/object/is")
+  , isPlainFunction     = require("type/plain-function/is")
+  , ensureIterable      = require("type/iterable/ensure")
+  , ensureString        = require("type/string/ensure")
+  , ensurePlainFunction = require("type/plain-function/ensure");
 
 module.exports = function (moduleIds, callback) {
-	// 1. Validate & resolve input
-	if (isObject(moduleIds)) {
-		moduleIds = aFrom(moduleIds);
-		if (!moduleIds.length) throw new TypeError("Minimum one moduleId is required");
+	if (isPlainFunction(moduleIds)) {
+		callback = moduleIds;
+		moduleIds = null;
 	} else {
-		moduleIds = [ensureString(moduleIds)];
+		if (isObject(moduleIds)) {
+			moduleIds = ensureIterable(moduleIds, {
+				ensureItem: ensureString,
+				name: "moduleIds",
+				denyEmpty: true
+			});
+		} else {
+			moduleIds = [ensureString(moduleIds)];
+		}
+		callback = ensurePlainFunction(callback, { name: "callback" });
 	}
-	ensureFunction(callback);
 
 	// 2. Cache currently cached module values
 	var cache = {};
-	moduleIds.forEach(function (moduleId) {
-		cache[moduleId] = require.cache[moduleId];
-		delete require.cache[moduleId];
-	});
+
+	if (moduleIds) {
+		moduleIds.forEach(function (moduleId) {
+			cache[moduleId] = require.cache[moduleId];
+			delete require.cache[moduleId];
+		});
+	} else {
+		Object.assign(cache, require.cache);
+		clear(require.cache);
+	}
 
 	try {
 		// 3. Run callback
