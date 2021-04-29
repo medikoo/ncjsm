@@ -97,6 +97,22 @@ if (fooModulePathData) {
 }
 ```
 
+#### requireUnached(moduleIds, callback)
+
+Create temporary environment where `require` of specific modules will not resolved the eventually cached verions
+
+```javascript
+var requireUncached = require("ncjsm/require-uncached");
+
+const firstCopyOfModule1 = require("./module1");
+
+var secondCopyOfModule2 = requireUnached([require.resolve("./module1")], function () {
+  return require("./module1");
+});
+
+console.log(firstCopyOfModule1 === secondCopyOfModule2); // false
+```
+
 #### isPackageRoot(dirPath)
 
 Whether provided path is a root of a package
