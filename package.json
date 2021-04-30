@@ -47,10 +47,7 @@
 	},
 	"eslintConfig": {
 		"extends": "medikoo/node/6",
-		"root": true,
-		"env": {
-			"node": true
-		}
+		"root": true
 	},
 	"eslintIgnore": [
 		"test/__playground/**/*.js"
