@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/medikoo/ncjsm/compare/v4.2.0...v4.3.0) (2022-01-24)
+
+### Features
+
+- Support async callback in `requireUncached` ([91fdb82](https://github.com/medikoo/ncjsm/commit/91fdb82b171651ff5740a3d6e6a12f632415e0e9))
+
 ## [4.2.0](https://github.com/medikoo/ncjsm/compare/v4.1.0...v4.2.0) (2021-04-30)
 
 ### Features
