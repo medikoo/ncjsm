@@ -6,7 +6,9 @@ var objForEach          = require("es5-ext/object/for-each")
   , isPlainFunction     = require("type/plain-function/is")
   , ensureIterable      = require("type/iterable/ensure")
   , ensureString        = require("type/string/ensure")
-  , ensurePlainFunction = require("type/plain-function/ensure");
+  , ensurePlainFunction = require("type/plain-function/ensure")
+  , isThenable          = require("type/thenable/is")
+  , finallyMethod       = require("ext/thenable_/finally");
 
 module.exports = function (moduleIds, callback) {
 	if (isPlainFunction(moduleIds)) {
@@ -25,7 +27,6 @@ module.exports = function (moduleIds, callback) {
 		callback = ensurePlainFunction(callback, { name: "callback" });
 	}
 
-	// 2. Cache currently cached module values
 	var cache = {};
 
 	if (moduleIds) {
@@ -38,14 +39,23 @@ module.exports = function (moduleIds, callback) {
 		clear(require.cache);
 	}
 
-	try {
-		// 3. Run callback
-		return callback();
-	} finally {
-		// 4. Restore state
+	var restore = function () {
 		objForEach(cache, function (value, moduleId) {
 			if (value) require.cache[moduleId] = value;
 			else delete require.cache[moduleId];
 		});
+	};
+
+	var result;
+	try {
+		result = callback();
+	} catch (error) {
+		restore();
+		throw error;
 	}
+	if (!isThenable(result)) {
+		restore();
+		return result;
+	}
+	return finallyMethod.call(result, restore);
 };
