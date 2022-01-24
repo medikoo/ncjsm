@@ -22,13 +22,13 @@
 		"type": "^2.5.0"
 	},
 	"devDependencies": {
-		"eslint": "^7.25.0",
-		"eslint-config-medikoo": "^4.0.0",
+		"eslint": "^7.32.0",
+		"eslint-config-medikoo": "^4.1.1",
 		"git-list-updated": "^1.2.1",
 		"husky": "^4.3.8",
 		"lint-staged": "^10.5.4",
-		"prettier-elastic": "^2.1.2",
-		"tad": "^3.0.1"
+		"prettier-elastic": "^2.2.1",
+		"tad": "^3.1.0"
 	},
 	"husky": {
 		"hooks": {
