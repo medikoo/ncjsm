@@ -1,6 +1,5 @@
-[![Build status][nix-build-image]][nix-build-url]
-[![Windows status][win-build-image]][win-build-url]
-![Transpilation status][transpilation-image]
+[![Build status][build-image]][build-url]
+[![Tests coverage][cov-image]][cov-url]
 [![npm version][npm-image]][npm-url]
 
 # ncjsm
@@ -195,10 +194,9 @@ By default all paths to all required modules are resolved. Resolution scope may 
 
     $ npm test
 
-[nix-build-image]: https://semaphoreci.com/api/v1/medikoo-org/ncjsm/branches/master/shields_badge.svg
-[nix-build-url]: https://semaphoreci.com/medikoo-org/ncjsm
-[win-build-image]: https://ci.appveyor.com/api/projects/status/i68ocohu91ejv77k?svg=true
-[win-build-url]: https://ci.appveyor.com/project/medikoo/ncjsm
-[transpilation-image]: https://img.shields.io/badge/transpilation-free-brightgreen.svg
+[build-image]: https://github.com/medikoo/ncjsm/workflows/Integrate/badge.svg
+[build-url]: https://github.com/medikoo/ncjsm/actions?query=workflow%3AIntegrate
+[cov-image]: https://img.shields.io/codecov/c/github/medikoo/ncjsm.svg
+[cov-url]: https://codecov.io/gh/medikoo/ncjsm
 [npm-image]: https://img.shields.io/npm/v/ncjsm.svg
 [npm-url]: https://www.npmjs.com/package/ncjsm
