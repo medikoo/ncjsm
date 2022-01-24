@@ -10,10 +10,7 @@
 		"browserify",
 		"webpack"
 	],
-	"repository": {
-		"type": "git",
-		"url": "medikoo/ncjsm"
-	},
+	"repository": "medikoo/ncjsm",
 	"dependencies": {
 		"builtin-modules": "^3.2.0",
 		"deferred": "^0.7.11",
