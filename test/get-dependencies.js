@@ -31,3 +31,13 @@ module.exports.ignoreExternal = function (t, a, d) {
 		d();
 	}, d);
 };
+
+module.exports.ignoreMissing = function (t, a, d) {
+	t(resolve(pgDir, "missing-reference.js"), { ignoreMissing: true }).done(result => {
+		a.deep(
+			result.sort(),
+			[resolve(pgDir, "missing-reference.js"), resolve(pgDir, "other.js")].sort()
+		);
+		d();
+	}, d);
+};

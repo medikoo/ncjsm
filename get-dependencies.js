@@ -28,9 +28,7 @@ const getDirectDependencies = function (modulePath, options) {
 					if (options.ignoreExternal) return null;
 					if (builtinModules.has(depPath.split("/")[0])) return null;
 				}
-				return cjsResolve(
-					dir, depPath
-				)(pathData => {
+				return cjsResolve(dir, depPath, { silent: true })(pathData => {
 					if (pathData) return pathData.targetPath;
 					if (options.ignoreMissing) return null;
 					throw new Error(
