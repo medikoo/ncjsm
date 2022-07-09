@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.1](https://github.com/medikoo/ncjsm/compare/v4.3.0...v4.3.1) (2022-07-09)
+
+### Bug Fixes
+
+- Fix `ignoreMissing` support in deep dependencies resolution ([#6](https://github.com/serverless/serverless/issues/6)) ([669491c](https://github.com/medikoo/ncjsm/commit/669491c8ba2942ef7f1d5caa98a11082d9767dd4)) ([Diego Henrique Domingues](https://github.com/ddomingues))
+
+### Maintenance Improvements
+
+- Bump dependencies ([48cac7c](https://github.com/medikoo/ncjsm/commit/48cac7ccc312dd58bee7559b9214fc13f78910b5))
+- Fix `.editorconfig` ([3300948](https://github.com/medikoo/ncjsm/commit/3300948b2f5d724df9d5efb14ebb0101f1a37691))
+- Upgrade `lint-staged` to v13 ([a6e6a8f](https://github.com/medikoo/ncjsm/commit/a6e6a8f2573a741a081dde9e32555aec140be73c))
+
 ## [4.3.0](https://github.com/medikoo/ncjsm/compare/v4.2.0...v4.3.0) (2022-01-24)
 
 ### Features
