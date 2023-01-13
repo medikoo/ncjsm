@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.2](https://github.com/medikoo/ncjsm/compare/v4.3.1...v4.3.2) (2023-01-13)
+
+### Bug Fixes
+
+- **`requireUncached`:** Fix modules cache recovery on global reset ([c90dae4](https://github.com/medikoo/ncjsm/commit/c90dae4c31fb4f3e3e490ca8af87d279500730ed))
+
 ### [4.3.1](https://github.com/medikoo/ncjsm/compare/v4.3.0...v4.3.1) (2022-07-09)
 
 ### Bug Fixes
