@@ -40,6 +40,11 @@ module.exports = function (moduleIds, callback) {
 	}
 
 	var restore = function () {
+		if (!moduleIds) {
+			Object.keys(require.cache).forEach(function (moduleId) {
+				if (!cache[moduleId]) delete require.cache[moduleId];
+			});
+		}
 		objForEach(cache, function (value, moduleId) {
 			if (value) require.cache[moduleId] = value;
 			else delete require.cache[moduleId];
