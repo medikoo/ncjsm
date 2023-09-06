@@ -119,7 +119,9 @@ var requireUncached = require("ncjsm/require-uncached");
 
 const firstCopyOfModule1 = require("./module1");
 
-var secondCopyOfModule2 = requireUnached(function () { return require("./module1"); });
+var secondCopyOfModule2 = requireUnached(function () {
+  return require("./module1");
+});
 
 console.log(firstCopyOfModule1 === secondCopyOfModule2); // false
 ```
@@ -193,6 +195,10 @@ By default all paths to all required modules are resolved. Resolution scope may 
 ## Tests [![Build Status](https://travis-ci.org/medikoo/ncjsm.svg)](https://travis-ci.org/medikoo/ncjsm)
 
     $ npm test
+
+## Security contact information
+
+To report a security vulnerability, please use the [Tidelift security contact](https://tidelift.com/security). Tidelift will coordinate the fix and disclosure.
 
 [build-image]: https://github.com/medikoo/ncjsm/workflows/Integrate/badge.svg
 [build-url]: https://github.com/medikoo/ncjsm/actions?query=workflow%3AIntegrate
